@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:13306/meddb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+  # traducao dos parâmetros de pageable. Com isso, nas requisições que utilizam paginação,
+  # devemos utilizar esses nomes que foram definidos.
+  data:
+    web:
+      pageable:
+        page-parameter: pagina
+        size-parameter: tamanho
+      sort:
+        sort-parameter: ordem
