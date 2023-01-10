@@ -14,3 +14,14 @@ spring:
         size-parameter: tamanho
       sort:
         sort-parameter: ordem
+  jackson:
+    default-property-inclusion: non_null
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}
+
+server:
+  error:
+    include-message: always

@@ -1,10 +1,11 @@
 package br.com.alura.med.controller;
 
-import br.com.alura.med.model.dto.MedicoDTO;
-import br.com.alura.med.model.record.DadosAtualizacaoMedico;
-import br.com.alura.med.model.record.DadosCadastroMedico;
-import br.com.alura.med.model.record.DadosListagemMedico;
-import br.com.alura.med.repository.MedicoRepository;
+import br.com.alura.med.domain.record.DadosAtualizacaoMedico;
+import br.com.alura.med.domain.record.DadosCadastroMedico;
+import br.com.alura.med.domain.record.DadosDetalhamentoMedico;
+import br.com.alura.med.domain.record.DadosListagemMedico;
+import br.com.alura.med.domain.repository.MedicoRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -14,8 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -27,11 +26,12 @@ public class MedicoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
+    public DadosDetalhamentoMedico cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
         log.info("{}::cadastrar - Dados recebidos: {}", getClass().getSimpleName(), dados);
         var medico = dados.converterParaMedico();
         log.info("{}::cadastrar - Dados salvos: {}", getClass().getSimpleName(), dados);
-        medicoRepository.save(medico);
+        medico = medicoRepository.save(medico);
+        return new DadosDetalhamentoMedico(medico);
     }
 
     @GetMapping
@@ -41,18 +41,28 @@ public class MedicoController {
 
     @Transactional
     @PutMapping
-    public MedicoDTO atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+    public DadosDetalhamentoMedico atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+        log.info("{}::atualizar - Dados recebidos: {}", getClass().getSimpleName(), dados);
         var medico = medicoRepository.getReferenceById(dados.id());
         medico = medico.atualizarInformacoes(dados);
-        return MedicoDTO.convertTo(medico);
+        log.info("{}::atualizar - Dados atualizados: {}", getClass().getSimpleName(), dados);
+        return new DadosDetalhamentoMedico(medico);
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Transactional
     public void excluir(@PathVariable Long id) {
         var medico = medicoRepository.getReferenceById(id);
+        log.info("{}::excluir - Médico excluído: {}", getClass().getSimpleName(), medico);
         medico.desativar();
+    }
+
+    @GetMapping("/{id}")
+    public DadosDetalhamentoMedico detalhar(@PathVariable Long id) {
+        var medico = medicoRepository.getReferenceById(id);
+        log.info("{}::detalhar - Detalhes do médico: {}", getClass().getSimpleName(), medico);
+        return new DadosDetalhamentoMedico(medico);
     }
 
 }

@@ -1,9 +1,8 @@
-package br.com.alura.med.model.record;
+package br.com.alura.med.domain.record;
 
-import br.com.alura.med.model.Endereco;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import br.com.alura.med.domain.model.Endereco;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public record DadosEndereco(
         @NotBlank
@@ -19,9 +18,7 @@ public record DadosEndereco(
         String uf,
         String complemento,
         String numero) {
-
     public Endereco converterParaEndereco() {
         return new Endereco(logradouro, bairro, cep, cidade, uf, complemento, numero);
     }
-
 }

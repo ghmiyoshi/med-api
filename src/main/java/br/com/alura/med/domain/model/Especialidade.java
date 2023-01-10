@@ -1,4 +1,4 @@
-package br.com.alura.med.model;
+package br.com.alura.med.domain.model;
 
 public enum Especialidade {
 

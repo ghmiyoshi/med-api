@@ -1,11 +1,10 @@
-package br.com.alura.med.model;
+package br.com.alura.med.domain.model;
 
-import br.com.alura.med.model.record.DadosEndereco;
+import br.com.alura.med.domain.record.DadosEndereco;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
 
 import static java.util.Objects.nonNull;
 
@@ -46,4 +45,5 @@ public class Endereco {
             this.numero = dados.numero();
         }
     }
+
 }

@@ -1,7 +1,7 @@
-package br.com.alura.med.model.record;
+package br.com.alura.med.domain.record;
 
-import br.com.alura.med.model.Especialidade;
-import br.com.alura.med.model.Medico;
+import br.com.alura.med.domain.model.Especialidade;
+import br.com.alura.med.domain.model.Medico;
 
 public record DadosListagemMedico(
         String nome, String email, String crm, Especialidade especialidade

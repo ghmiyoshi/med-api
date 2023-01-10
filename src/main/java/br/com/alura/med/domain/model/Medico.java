@@ -1,11 +1,12 @@
-package br.com.alura.med.model;
+package br.com.alura.med.domain.model;
 
-import br.com.alura.med.model.record.DadosAtualizacaoMedico;
+import br.com.alura.med.domain.record.DadosAtualizacaoMedico;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 import static java.util.Objects.nonNull;
 
@@ -27,7 +28,6 @@ public class Medico {
     private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
-
     private Boolean ativo;
 
     public Medico(String nome, String telefone, Endereco endereco) {
@@ -44,6 +44,7 @@ public class Medico {
         this.crm = crm;
         this.especialidade = especialidade;
         this.endereco = endereco;
+        this.ativo = true;
     }
 
     public Medico atualizarInformacoes(DadosAtualizacaoMedico dados) {
@@ -65,6 +66,15 @@ public class Medico {
             this.ativo = false;
         } else {
             throw new RuntimeException("Medico já está inativo");
+        }
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 

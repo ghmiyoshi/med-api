@@ -1,6 +1,6 @@
-package br.com.alura.med.repository;
+package br.com.alura.med.domain.repository;
 
-import br.com.alura.med.model.Medico;
+import br.com.alura.med.domain.model.Medico;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
