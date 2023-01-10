@@ -29,7 +29,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     /* Filtro para interceptar todas as requisições */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         var tokenJwt = recuperarToken(request);
 
         if (nonNull(tokenJwt)) {

@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Builder
 public class ApiError {
+    
     @Builder.Default
     private OffsetDateTime timestamp = OffsetDateTime.now();
     private HttpStatus status;

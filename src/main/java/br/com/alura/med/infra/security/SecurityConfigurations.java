@@ -39,7 +39,8 @@ public class SecurityConfigurations {
 
     /* Bean configurado para conseguir fazer injecao de dependencia de AuthenticationManager */
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
