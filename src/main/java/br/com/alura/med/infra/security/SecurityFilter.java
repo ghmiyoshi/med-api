@@ -1,7 +1,7 @@
 package br.com.alura.med.infra.security;
 
-import br.com.alura.med.domain.service.AutenticacaoService;
-import br.com.alura.med.domain.service.TokenService;
+import br.com.alura.med.service.autenticacao.AutenticacaoService;
+import br.com.alura.med.service.autenticacao.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,21 +29,23 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     /* Filtro para interceptar todas as requisições */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+                                    final FilterChain filterChain)
             throws ServletException, IOException {
         var tokenJwt = recuperarToken(request);
 
         if (nonNull(tokenJwt)) {
             var subject = tokenService.getSubject(tokenJwt);
             var usuario = autenticacaoService.loadUserByUsername(subject);
-            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+            var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
+                                                                         usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         filterChain.doFilter(request, response);
     }
 
-    private String recuperarToken(HttpServletRequest request) {
+    private String recuperarToken(final HttpServletRequest request) {
         var authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
         if (nonNull(authorizationHeader)) {
             return authorizationHeader.replace(PREFIX_TOKEN, "");

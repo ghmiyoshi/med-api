@@ -20,7 +20,7 @@ spring:
 api:
   security:
     token:
-      secret: ${JWT_SECRET}
+      secret: ${JWT_SECRET:123456}
 
 server:
   error:

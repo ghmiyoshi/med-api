@@ -1,9 +1,9 @@
 package br.com.alura.med.controller;
 
-import br.com.alura.med.domain.model.Usuario;
-import br.com.alura.med.domain.record.DadosAutenticacao;
-import br.com.alura.med.domain.record.DadosTokenJwt;
-import br.com.alura.med.domain.service.TokenService;
+import br.com.alura.med.domain.usuario.DadosAutenticacao;
+import br.com.alura.med.domain.usuario.Usuario;
+import br.com.alura.med.infra.security.DadosTokenJwt;
+import br.com.alura.med.service.autenticacao.TokenService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,13 @@ public class AutenticacaoController {
     private final TokenService tokenService;
 
     @PostMapping
-    public DadosTokenJwt efetuarLogin(@RequestBody @Valid DadosAutenticacao dadosAutenticacao) {
+    public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {
         log.info("{}::efetuarLogin - Dados recebidos: {}", getClass().getSimpleName(), dadosAutenticacao);
-        var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(), dadosAutenticacao.senha());
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(),
+                                                                          dadosAutenticacao.senha());
         var authentication = authenticationManager.authenticate(authenticationToken);
         log.info("{}::efetuarLogin - Usuário autenticado", getClass().getSimpleName());
+
         var tokenJwt = tokenService.gerarToken((Usuario) authentication.getPrincipal());
         log.info("{}::efetuarLogin - Token gerado com sucesso", getClass().getSimpleName());
         return new DadosTokenJwt(tokenJwt);

@@ -23,23 +23,24 @@ public class SecurityConfigurations {
 
     /* Desabilita a seguranca do Spring */
     @Bean
-    public SecurityFilterChain securityConfiguration(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityConfiguration(final HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/medicos").permitAll()
                 .requestMatchers(HttpMethod.GET, "/medicos/*").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/medicos/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/medicos/**").hasRole("ADMIN")
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-    /* Bean configurado para conseguir fazer injecao de dependencia de AuthenticationManager */
+    /* Bean configurado para conseguir fazer injecao de dependencia de
+    AuthenticationManager */
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+    public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration)
             throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }

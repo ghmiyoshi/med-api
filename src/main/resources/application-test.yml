@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:13306/meddbtest?useSSL=false&serverTimezone=UTC

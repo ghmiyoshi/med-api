@@ -1,15 +1,12 @@
-package br.com.alura.med.domain.record;
+package br.com.alura.med.domain.usuario;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.constraints.NotBlank;
 
-public record DadosAutenticacao(
-        @NotBlank(message = "Login é obrigatório")
-        String login,
-        @NotBlank(message = "Senha é obrigatório")
-        String senha) {
-
+public record DadosAutenticacao(@NotBlank(message = "Login é obrigatório") String login,
+                                @NotBlank(message = "Senha é obrigatório")
+                                String senha) {
     @Override
     public String toString() {
         try {
@@ -18,4 +15,5 @@ public record DadosAutenticacao(
             throw new RuntimeException(e);
         }
     }
+    
 }
