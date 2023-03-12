@@ -1,6 +1,6 @@
-package br.com.alura.med.domain.model;
+package br.com.alura.med.domain.medico;
 
-import br.com.alura.med.domain.record.DadosAtualizacaoMedico;
+import br.com.alura.med.domain.endereco.Endereco;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
@@ -28,16 +28,10 @@ public class Medico {
     private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
-    private Boolean ativo;
+    private boolean ativo;
 
-    public Medico(String nome, String telefone, Endereco endereco) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.endereco = endereco;
-        this.ativo = true;
-    }
-
-    public Medico(String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco) {
+    public Medico(String nome, String email, String telefone, String crm, Especialidade especialidade,
+                  Endereco endereco) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -45,6 +39,16 @@ public class Medico {
         this.especialidade = especialidade;
         this.endereco = endereco;
         this.ativo = true;
+    }
+
+    public Medico(DadosCadastroMedico dados) {
+        this.ativo = true;
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+        this.crm = dados.crm();
+        this.especialidade = dados.especialidade();
+        this.endereco = new Endereco(dados.endereco());
     }
 
     public Medico atualizarInformacoes(DadosAtualizacaoMedico dados) {
@@ -62,7 +66,7 @@ public class Medico {
     }
 
     public void desativar() {
-        if (this.ativo.equals(true)) {
+        if (this.ativo) {
             this.ativo = false;
         } else {
             throw new RuntimeException("Medico já está inativo");

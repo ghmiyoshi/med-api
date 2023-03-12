@@ -1,4 +1,4 @@
-package br.com.alura.med.domain.model;
+package br.com.alura.med.domain.usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

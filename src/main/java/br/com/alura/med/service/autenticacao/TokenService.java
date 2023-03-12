@@ -1,6 +1,6 @@
-package br.com.alura.med.domain.service;
+package br.com.alura.med.service.autenticacao;
 
-import br.com.alura.med.domain.model.Usuario;
+import br.com.alura.med.domain.usuario.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -20,13 +20,14 @@ public class TokenService {
 
     private static final String ZONE_ID = "America/Sao_Paulo";
 
-    public String gerarToken(Usuario usuario) {
+    public String gerarToken(final Usuario usuario) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API med")
                     .withSubject(usuario.getLogin())
-                    .withClaim("id", usuario.getId()) // Para adicionar mais informacoes no token
+                    .withClaim("id", usuario.getId()) // Para adicionar mais
+                    // informacoes no token
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
@@ -34,7 +35,7 @@ public class TokenService {
         }
     }
 
-    public String getSubject(String tokenJwt) {
+    public String getSubject(final String tokenJwt) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.require(algoritmo)

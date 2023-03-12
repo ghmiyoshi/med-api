@@ -1,4 +1,4 @@
-package br.com.alura.med.domain.record;
+package br.com.alura.med.infra.security;
 
 public record DadosTokenJwt(String token) {
 }

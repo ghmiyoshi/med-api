@@ -1,6 +1,5 @@
-package br.com.alura.med.domain.model;
+package br.com.alura.med.domain.endereco;
 
-import br.com.alura.med.domain.record.DadosEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +20,16 @@ public class Endereco {
     private String uf;
     private String complemento;
     private String numero;
+
+    public Endereco(DadosEndereco dados) {
+        this.logradouro = dados.logradouro();
+        this.bairro = dados.bairro();
+        this.cep = dados.cep();
+        this.uf = dados.uf();
+        this.cidade = dados.cidade();
+        this.numero = dados.numero();
+        this.complemento = dados.complemento();
+    }
 
     public void atualizarInformacoes(DadosEndereco dados) {
         if (nonNull(dados.logradouro())) {

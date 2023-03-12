@@ -1,16 +1,14 @@
-package br.com.alura.med.domain.record;
+package br.com.alura.med.domain.paciente;
 
+import br.com.alura.med.domain.endereco.DadosEndereco;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosAtualizacaoMedico(
-        @NotNull
-        Long id,
-        String nome,
-        String telefone,
-        DadosEndereco endereco) {
-
+public record DadosAtualizacaoPaciente(@NotNull Long id,
+                                       String nome,
+                                       String telefone,
+                                       DadosEndereco endereco) {
     @Override
     public String toString() {
         try {
@@ -19,4 +17,5 @@ public record DadosAtualizacaoMedico(
             throw new RuntimeException(e);
         }
     }
+
 }
