@@ -1,0 +1,20 @@
+create table tb_medicos_audit(
+    id            bigint       not null,
+    revision_info_id   bigint       not null,
+    revision_type tinyint      null,
+    ativo         bit          null,
+    crm           varchar(255) null,
+    email         varchar(255) null,
+    bairro        varchar(255) null,
+    cep           varchar(255) null,
+    cidade        varchar(255) null,
+    complemento   varchar(255) null,
+    logradouro    varchar(255) null,
+    numero        varchar(255) null,
+    uf            varchar(255) null,
+    especialidade varchar(255) null,
+    nome          varchar(255) null,
+    telefone      varchar(255) null,
+    primary key (id, revision_info_id),
+    constraint fk_revision_info_id foreign key (revision_info_id) references revision_info (id)
+);

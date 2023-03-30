@@ -1,5 +1,6 @@
 package br.com.alura.med.domain.medico;
 
+import br.com.alura.med.domain.audit.Auditable;
 import br.com.alura.med.domain.endereco.Endereco;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,15 +8,17 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import static java.util.Objects.nonNull;
 
 @Getter
 @NoArgsConstructor
+@Audited
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_medicos")
 @Entity
-public class Medico {
+public class Medico extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
