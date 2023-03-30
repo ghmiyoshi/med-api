@@ -12,7 +12,10 @@ create table tb_medicos(
     numero varchar(20),
     uf char(2) not null,
     cidade varchar(100) not null,
+    created_by varchar(100) null,
+    last_modified_by varchar(100) null,
+    creation_date datetime not null,
+    last_modified_date datetime not null,
 
     primary key(id)
-
 );
