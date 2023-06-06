@@ -1,9 +1,12 @@
 package br.com.alura.med.infra.handler;
 
-public class ValidacaoException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+public class ValidacaoException extends ResponseStatusException {
 
     public ValidacaoException(final String mensagem) {
-        super(mensagem);
+        super(HttpStatus.BAD_REQUEST, mensagem);
     }
 
 }

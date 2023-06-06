@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import static java.util.Objects.nonNull;
 
@@ -72,7 +74,7 @@ public class Medico extends Auditable {
         if (this.ativo) {
             this.ativo = false;
         } else {
-            throw new RuntimeException("Medico já está inativo");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Medico já está inativo");
         }
     }
 

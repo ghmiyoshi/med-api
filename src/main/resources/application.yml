@@ -23,6 +23,9 @@ spring:
         sort-parameter: ordem
   jackson:
     default-property-inclusion: non_null
+    property-naming-strategy: SNAKE_CASE
+    deserialization:
+      fail-on-unknown-properties: true
 
 api:
   security:

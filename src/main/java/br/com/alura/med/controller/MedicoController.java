@@ -14,8 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -26,6 +28,7 @@ public class MedicoController {
 
     private final MedicoRepository medicoRepository;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DadosDetalhamentoMedico cadastrar(@RequestBody @Valid final DadosCadastroMedico dados) {
@@ -37,12 +40,14 @@ public class MedicoController {
         return new DadosDetalhamentoMedico(medico);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 1, sort = "nome", direction = Sort.Direction.ASC) final Pageable pageable) {
         log.info("{}::listar - Listando médicos", getClass().getSimpleName());
         return medicoRepository.findAllByAtivoTrue(pageable).map(DadosListagemMedico::new);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @Transactional
     @PutMapping
     public DadosDetalhamentoMedico atualizar(@RequestBody @Valid final DadosAtualizacaoMedico dados) {
@@ -54,18 +59,22 @@ public class MedicoController {
         return new DadosDetalhamentoMedico(medico);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @Transactional
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable final Long id) {
         var medico = medicoRepository.getReferenceById(id);
-        log.info("{}::excluir - Médico excluído: {}", getClass().getSimpleName(), medico);
         medico.desativar();
+        log.info("{}::excluir - Médico excluído: {}", getClass().getSimpleName(), medico);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public DadosDetalhamentoMedico detalhar(@PathVariable final Long id) {
-        var medico = medicoRepository.getReferenceById(id);
+        var medico = medicoRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                                  String.format("Unable to find medico with id %d", id)));
         log.info("{}::detalhar - Detalhes do médico: {}", getClass().getSimpleName(), medico);
         return new DadosDetalhamentoMedico(medico);
     }
