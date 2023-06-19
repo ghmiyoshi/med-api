@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AutenticacaoController {
 
-    private final AuthenticationManager authenticationManager;
-
-    private final TokenService tokenService;
+    private AuthenticationManager authenticationManager;
+    private TokenService tokenService;
 
     @PostMapping
     public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {

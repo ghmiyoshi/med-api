@@ -26,7 +26,7 @@ import org.springframework.web.server.ResponseStatusException;
 @SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
-    private final MedicoRepository medicoRepository;
+    private MedicoRepository medicoRepository;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
@@ -40,7 +40,6 @@ public class MedicoController {
         return new DadosDetalhamentoMedico(medico);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 1, sort = "nome", direction = Sort.Direction.ASC) final Pageable pageable) {
         log.info("{}::listar - Listando médicos", getClass().getSimpleName());

@@ -10,7 +10,7 @@ import br.com.alura.med.domain.repository.PacienteRepository;
 import br.com.alura.med.infra.handler.ValidacaoException;
 import br.com.alura.med.service.consulta.validacoes.ValidadorAgendamentoDeConsulta;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +20,13 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class ConsultaService {
 
     private final ConsultaRepository consultaRepository;
-
     private final MedicoRepository medicoRepository;
-
     private final PacienteRepository pacienteRepository;
-
     private final List<ValidadorAgendamentoDeConsulta> validacoesAgendamentoDeConsulta;
 
     public DadosDetalhamentoConsulta agendar(final DadosAgendamentoConsulta dados) {

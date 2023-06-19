@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
-    private final ConsultaService consultaService;
+    private ConsultaService consultaService;
 
     @PostMapping
     @Transactional
