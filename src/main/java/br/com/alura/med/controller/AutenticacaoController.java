@@ -5,7 +5,7 @@ import br.com.alura.med.domain.usuario.Usuario;
 import br.com.alura.med.infra.security.DadosTokenJwt;
 import br.com.alura.med.service.autenticacao.TokenService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
 
-    private AuthenticationManager authenticationManager;
-    private TokenService tokenService;
+    private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
     @PostMapping
     public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class ConsultaController {
 
     private ConsultaService consultaService;
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<DadosDetalhamentoConsulta> agendar(@RequestBody @Valid final DadosAgendamentoConsulta dados) {
         return ResponseEntity.ok(consultaService.agendar(dados));

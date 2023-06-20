@@ -8,5 +8,4 @@ create table tb_consultas(
     primary key(id),
     constraint fk_consultas_medico_id foreign key(medico_id) references tb_medicos(id),
     constraint fk_consultas_paciente_id foreign key(paciente_id) references tb_pacientes(id)
-
 );
