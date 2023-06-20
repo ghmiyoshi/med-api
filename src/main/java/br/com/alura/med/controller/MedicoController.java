@@ -1,5 +1,6 @@
 package br.com.alura.med.controller;
 
+import br.com.alura.med.config.cache.CachingConfig;
 import br.com.alura.med.domain.medico.DadosAtualizacaoMedico;
 import br.com.alura.med.domain.medico.DadosCadastroMedico;
 import br.com.alura.med.domain.medico.DadosDetalhamentoMedico;
@@ -9,6 +10,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,8 +32,9 @@ public class MedicoController {
     private MedicoRepository medicoRepository;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @PostMapping
+    @CacheEvict(value = CachingConfig.MEDICOS, allEntries = true)
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
     public DadosDetalhamentoMedico cadastrar(@RequestBody @Valid final DadosCadastroMedico dados) {
         log.info("{}::cadastrar - Dados recebidos: {}", getClass().getSimpleName(), dados);
         var medico = dados.converterParaMedico();
@@ -40,6 +44,7 @@ public class MedicoController {
         return new DadosDetalhamentoMedico(medico);
     }
 
+    @Cacheable(CachingConfig.MEDICOS)
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 1, sort = "nome", direction = Sort.Direction.ASC) final Pageable pageable) {
         log.info("{}::listar - Listando médicos", getClass().getSimpleName());
@@ -48,6 +53,7 @@ public class MedicoController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @Transactional
+    @CacheEvict(value = CachingConfig.MEDICOS, allEntries = true)
     @PutMapping
     public DadosDetalhamentoMedico atualizar(@RequestBody @Valid final DadosAtualizacaoMedico dados) {
         log.info("{}::atualizar - Dados recebidos: {}", getClass().getSimpleName(), dados);
@@ -60,8 +66,9 @@ public class MedicoController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @Transactional
-    @DeleteMapping("/{id}")
+    @CacheEvict(value = CachingConfig.MEDICOS, allEntries = true)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public void excluir(@PathVariable final Long id) {
         var medico = medicoRepository.getReferenceById(id);
         medico.desativar();
