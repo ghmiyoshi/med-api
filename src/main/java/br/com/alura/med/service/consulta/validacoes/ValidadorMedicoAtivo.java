@@ -12,7 +12,7 @@ import static java.util.Objects.isNull;
 @AllArgsConstructor
 public class ValidadorMedicoAtivo implements ValidadorAgendamentoDeConsulta {
 
-    private final MedicoRepository medicoRepository;
+    private MedicoRepository medicoRepository;
 
     @Override
     public void validar(final DadosAgendamentoConsulta dados) {

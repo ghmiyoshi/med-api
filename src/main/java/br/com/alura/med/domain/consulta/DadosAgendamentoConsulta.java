@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /* @JsonAlias("produto_id") mapeia "apelidos" alternativos para os campos que serão recebidos do JSON*/
 public record DadosAgendamentoConsulta(@JsonAlias("id_medico") Long idMedico,
-                                       @NotNull @JsonProperty("id_paciente") Long idPaciente,
+                                       @JsonProperty("id_paciente") @NotNull Long idPaciente,
                                        @NotNull
                                        @Future
                                        @JsonFormat(pattern = "dd/MM/yyyy HH:mm") // indico o padrão de data esperado

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class ValidadorPacienteAtivo implements ValidadorAgendamentoDeConsulta {
 
-    private final PacienteRepository pacienteRepository;
+    private PacienteRepository pacienteRepository;
 
     @Override
     public void validar(final DadosAgendamentoConsulta dados) {

@@ -14,7 +14,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -63,7 +62,7 @@ public class ApiExceptionHandler {
                         Map<String, String> errorField = new HashMap<>();
                         errorField.put("message", fieldError.getDefaultMessage());
                         return errorField;
-                    }).collect(Collectors.toList());
+                    }).toList();
 
 
             return buildProblemDetailWithFieldErrors(exception, apiErrorFields);
@@ -75,7 +74,7 @@ public class ApiExceptionHandler {
                     errorField.put("field", fieldError.getField());
                     errorField.put("message", fieldError.getDefaultMessage());
                     return errorField;
-                }).collect(Collectors.toList());
+                }).toList();
         return buildProblemDetailWithFieldErrors(exception, apiErrorFields);
     }
 
