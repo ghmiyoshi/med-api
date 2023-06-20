@@ -4,12 +4,13 @@ import br.com.alura.med.domain.paciente.*;
 import br.com.alura.med.domain.repository.PacienteRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,8 +18,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @RestController
 @RequestMapping("/pacientes")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @SecurityRequirement(name = "bearer-key")
+@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
 public class PacienteController {
 
     private final PacienteRepository repository;
@@ -37,7 +39,7 @@ public class PacienteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(sort = {"nome"}) final Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(sort = "nome") final Pageable paginacao) {
         log.info("{}::listar - Listando pacientes", getClass().getSimpleName());
         var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
         return ResponseEntity.ok(page);

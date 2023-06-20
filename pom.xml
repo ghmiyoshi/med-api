@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.alura</groupId>
-    <artifactId>med</artifactId>
+    <artifactId>med-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>med-api</name>
     <description>Curso Alura Spring Boot</description>

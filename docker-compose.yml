@@ -1,0 +1,40 @@
+version: "3.8"
+name: spring-mysql
+services:
+  api:
+    container_name: med-api
+    build: .
+    restart: always
+    image: med-api
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-mysql-network
+    environment:
+      DATASOURCE_URL: ${DATASOURCE_URL}
+      DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
+      DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: mysql-db
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-mysql-network
+    environment:
+      MYSQL_DATABASE_URL: ${DATASOURCE_URL}
+      MYSQL_DATABASE: meddb
+      MYSQL_ROOT_USER: ${DATASOURCE_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DATASOURCE_PASSWORD}
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 20s
+        retries: 10
+networks:
+  spring-mysql-network:
+    name: spring-mysql-network

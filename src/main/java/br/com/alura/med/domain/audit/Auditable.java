@@ -4,6 +4,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -20,6 +22,7 @@ public abstract class Auditable {
     protected String createdBy;
 
     @CreatedDate
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     protected LocalDateTime creationDate;
 
@@ -27,6 +30,7 @@ public abstract class Auditable {
     protected String lastModifiedBy;
 
     @LastModifiedDate
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     protected LocalDateTime lastModifiedDate;
 

@@ -7,7 +7,7 @@ import br.com.alura.med.domain.medico.DadosListagemMedico;
 import br.com.alura.med.domain.repository.MedicoRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Slf4j
 @RestController
 @RequestMapping("/medicos")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
