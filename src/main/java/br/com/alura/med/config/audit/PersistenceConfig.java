@@ -1,5 +1,6 @@
-package br.com.alura.med.infra.audit;
+package br.com.alura.med.config.audit;
 
+import br.com.alura.med.infra.audit.RevisionAuditorAwareImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

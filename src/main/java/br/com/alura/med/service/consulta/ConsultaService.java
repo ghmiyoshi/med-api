@@ -7,11 +7,15 @@ import br.com.alura.med.domain.medico.Medico;
 import br.com.alura.med.domain.repository.ConsultaRepository;
 import br.com.alura.med.domain.repository.MedicoRepository;
 import br.com.alura.med.domain.repository.PacienteRepository;
+import br.com.alura.med.infra.event.ConsultaEvent;
 import br.com.alura.med.infra.handler.ValidacaoException;
 import br.com.alura.med.service.consulta.validacoes.ValidadorAgendamentoDeConsulta;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +32,8 @@ public class ConsultaService {
     private final MedicoRepository medicoRepository;
     private final PacienteRepository pacienteRepository;
     private final List<ValidadorAgendamentoDeConsulta> validacoesAgendamentoDeConsulta;
+    private final ApplicationEventPublisher applicationEventPublisher;
+    private final ObjectMapper objectMapper;
 
     public DadosDetalhamentoConsulta agendar(final DadosAgendamentoConsulta dados) {
         log.info("{}::agendar - Dados recebidos: {}", getClass().getSimpleName(), dados);
@@ -41,7 +47,13 @@ public class ConsultaService {
         var consulta = new Consulta(null, medico, paciente, dados.data());
         consulta = consultaRepository.save(consulta);
 
-        log.info("{}::agendar - Dados salvos: {}", getClass().getSimpleName(), consulta);
+        try {
+            log.info("{}::agendar - Dados salvos: {}", getClass().getSimpleName(),
+                     objectMapper.writeValueAsString(consulta));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        applicationEventPublisher.publishEvent(new ConsultaEvent(consulta));
         return new DadosDetalhamentoConsulta(consulta);
     }
 

@@ -4,6 +4,7 @@ import br.com.alura.med.domain.medico.Medico;
 import br.com.alura.med.domain.paciente.Paciente;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -37,7 +38,9 @@ public class Consulta {
     @Override
     public String toString() {
         try {
-            return new ObjectMapper().writeValueAsString(this);
+            var objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

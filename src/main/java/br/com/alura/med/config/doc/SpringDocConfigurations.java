@@ -1,4 +1,4 @@
-package br.com.alura.med.infra.doc;
+package br.com.alura.med.config.doc;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
