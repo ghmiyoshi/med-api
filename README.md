@@ -42,7 +42,15 @@
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/config/SpringConfig.java
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/config/cache/CachingConfig.java
 
-  * Criar **Dockerfile** e **docker-compose.yml** com variaveis de ambiente **.env**
+  * Criar **Dockerfile** e **docker-compose.yml** com variaveis de ambiente **.env**;<br>
   https://github.com/ghmiyoshi/med-api/blob/main/Dockerfile
   https://github.com/ghmiyoshi/med-api/blob/main/docker-compose.yml
   https://github.com/ghmiyoshi/med-api/blob/main/.env
+
+  * Configuração e utilização do **ObjectMapper** no toString() das models;<br>
+  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/domain/utils/ObjectMapperUtils.java
+  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/domain/utils/JsonAbstract.java
+
+  * Utlização de **Spring Event** para disparar eventos<br>
+  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/infra/event/EmailService.java
+  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/service/consulta/ConsultaService.java

@@ -1,5 +1,6 @@
-package br.com.alura.med.infra.event;
+package br.com.alura.med.service.email;
 
+import br.com.alura.med.infra.event.ConsultaEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

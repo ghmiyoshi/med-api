@@ -1,5 +1,6 @@
 package br.com.alura.med.domain.endereco;
 
+import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import static java.util.Objects.nonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class Endereco {
+public class Endereco extends JsonAbstract {
 
     private String logradouro;
     private String bairro;

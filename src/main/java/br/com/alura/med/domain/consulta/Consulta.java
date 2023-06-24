@@ -2,9 +2,7 @@ package br.com.alura.med.domain.consulta;
 
 import br.com.alura.med.domain.medico.Medico;
 import br.com.alura.med.domain.paciente.Paciente;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,7 +17,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_consultas")
 @Entity
-public class Consulta {
+public class Consulta extends JsonAbstract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +32,5 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime data;
-
-    @Override
-    public String toString() {
-        try {
-            var objectMapper = new ObjectMapper();
-            objectMapper.registerModule(new JavaTimeModule());
-            return objectMapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

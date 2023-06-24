@@ -2,8 +2,6 @@ package br.com.alura.med.domain.medico;
 
 import br.com.alura.med.domain.audit.Auditable;
 import br.com.alura.med.domain.endereco.Endereco;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -75,15 +73,6 @@ public class Medico extends Auditable {
             this.ativo = false;
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Medico já está inativo");
-        }
-    }
-
-    @Override
-    public String toString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
         }
     }
 

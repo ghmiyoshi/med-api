@@ -1,5 +1,6 @@
 package br.com.alura.med.domain.audit;
 
+import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable {
+public abstract class Auditable extends JsonAbstract {
 
     @CreatedBy
     protected String createdBy;

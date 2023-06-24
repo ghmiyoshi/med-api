@@ -15,10 +15,10 @@ import java.time.ZoneId;
 @Service
 public class TokenService {
 
+    private static final String ZONE_ID = "America/Sao_Paulo";
+
     @Value("${api.security.token.secret}")
     private String secret;
-
-    private static final String ZONE_ID = "America/Sao_Paulo";
 
     public String gerarToken(final Usuario usuario) {
         try {

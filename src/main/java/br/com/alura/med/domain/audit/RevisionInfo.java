@@ -7,15 +7,11 @@ import org.hibernate.envers.RevisionEntity;
 import org.hibernate.envers.RevisionNumber;
 import org.hibernate.envers.RevisionTimestamp;
 
-import java.io.Serializable;
-
 @Data
 @Entity
 @Table(name = "revision_info")
 @RevisionEntity(RevisionAuditorAwareImpl.class)
-public class RevisionInfo implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class RevisionInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

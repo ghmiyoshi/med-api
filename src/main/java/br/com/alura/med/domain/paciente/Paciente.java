@@ -1,8 +1,7 @@
 package br.com.alura.med.domain.paciente;
 
 import br.com.alura.med.domain.endereco.Endereco;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import static java.util.Objects.nonNull;
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_pacientes")
 @Entity
-public class Paciente {
+public class Paciente extends JsonAbstract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,15 +56,6 @@ public class Paciente {
 
     public void excluir() {
         this.ativo = false;
-    }
-
-    @Override
-    public String toString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

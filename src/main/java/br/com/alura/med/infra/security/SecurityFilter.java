@@ -20,11 +20,11 @@ import static java.util.Objects.nonNull;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
-    private final TokenService tokenService;
-    private final AutenticacaoService autenticacaoService;
-
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String PREFIX_TOKEN = "Bearer ";
+
+    private final TokenService tokenService;
+    private final AutenticacaoService autenticacaoService;
 
     /* Filtro para interceptar todas as requisições */
     @Override

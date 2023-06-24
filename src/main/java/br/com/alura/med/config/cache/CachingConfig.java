@@ -13,9 +13,9 @@ import static javax.management.timer.Timer.ONE_MINUTE;
 @Configuration
 public class CachingConfig {
 
-    private CacheManager cacheManager;
-
     public static final String MEDICOS = "medicos";
+
+    private CacheManager cacheManager;
 
     @Scheduled(fixedRate = ONE_MINUTE)
     public void evictAllCachesAtIntervals() {
