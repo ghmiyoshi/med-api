@@ -1,4 +1,6 @@
-package br.com.alura.med.domain.utils;
+package br.com.alura.med.domain;
+
+import br.com.alura.med.domain.utils.ObjectMapperUtils;
 
 public abstract class JsonAbstract {
 

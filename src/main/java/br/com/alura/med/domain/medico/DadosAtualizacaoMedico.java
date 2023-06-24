@@ -1,8 +1,7 @@
 package br.com.alura.med.domain.medico;
 
 import br.com.alura.med.domain.endereco.DadosEndereco;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.alura.med.domain.utils.ObjectMapperUtils;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoMedico(@NotNull Long id,
@@ -12,11 +11,7 @@ public record DadosAtualizacaoMedico(@NotNull Long id,
 
     @Override
     public String toString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return ObjectMapperUtils.writeObjectInJson(this);
     }
 
 }

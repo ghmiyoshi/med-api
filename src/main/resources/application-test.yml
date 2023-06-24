@@ -1,3 +1,11 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/meddbtest?useSSL=false&serverTimezone=UTC
+    url: jdbc:h2:mem:meddb
+    username: root
+    password: root
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false

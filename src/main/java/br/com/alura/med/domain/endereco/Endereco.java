@@ -1,6 +1,6 @@
 package br.com.alura.med.domain.endereco;
 
-import br.com.alura.med.domain.utils.JsonAbstract;
+import br.com.alura.med.domain.JsonAbstract;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

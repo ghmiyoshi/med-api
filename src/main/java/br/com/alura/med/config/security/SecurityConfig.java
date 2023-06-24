@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 @Configuration
 @EnableMethodSecurity
-public class SecurityConfigurations {
+public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
 
@@ -45,10 +45,6 @@ public class SecurityConfigurations {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    private String bCryptPassword() {
-        return new BCryptPasswordEncoder().encode("123456");
     }
 
 }

@@ -1,8 +1,8 @@
 package br.com.alura.med.domain.consulta;
 
+import br.com.alura.med.domain.JsonAbstract;
 import br.com.alura.med.domain.medico.Medico;
 import br.com.alura.med.domain.paciente.Paciente;
-import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

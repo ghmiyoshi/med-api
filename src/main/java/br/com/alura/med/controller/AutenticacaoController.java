@@ -25,7 +25,6 @@ public class AutenticacaoController {
 
     @PostMapping
     public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {
-        log.info("{}::efetuarLogin - Dados recebidos: {}", getClass().getSimpleName(), dadosAutenticacao);
         var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(),
                                                                           dadosAutenticacao.senha());
         var authentication = authenticationManager.authenticate(authenticationToken);

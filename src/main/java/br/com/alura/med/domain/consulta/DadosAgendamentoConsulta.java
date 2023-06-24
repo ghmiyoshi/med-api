@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-/* @JsonAlias("produto_id") mapeia "apelidos" alternativos para os campos que serão recebidos do JSON*/
+/* @JsonAlias("produto_id") mapeia "apelidos" alternativos para os campos que serão recebidos do JSON */
 public record DadosAgendamentoConsulta(@JsonAlias("id_medico") Long idMedico,
                                        @JsonProperty("id_paciente") @NotNull Long idPaciente,
                                        @NotNull

@@ -1,7 +1,7 @@
 package br.com.alura.med.domain.paciente;
 
+import br.com.alura.med.domain.JsonAbstract;
 import br.com.alura.med.domain.endereco.Endereco;
-import br.com.alura.med.domain.utils.JsonAbstract;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
