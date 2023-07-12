@@ -54,3 +54,6 @@
   * Utlização de **Spring Event** para disparar eventos<br>
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/infra/event/EmailService.java
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/service/consulta/ConsultaService.java
+
+  * Criação do template ao abrir PRs e definição dos code owners do projeto<br>
+  https://github.com/ghmiyoshi/med-api/tree/develop/.github
