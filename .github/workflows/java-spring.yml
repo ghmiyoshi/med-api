@@ -1,4 +1,4 @@
-name: Java and Spring CI/CD
+name: Java and Spring
 
 on:
   push:
