@@ -57,3 +57,5 @@
 
   * Criação do template ao abrir PRs e definição dos code owners do projeto<br>
   https://github.com/ghmiyoshi/med-api/tree/develop/.github
+
+  * Criação de workflow e actions
