@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
@@ -66,6 +67,27 @@ class ConsultaControllerTest {
                                            .content(dadosAgendamentoConsultaJson.write(
                                                    new DadosAgendamentoConsulta(2L, 5L, data, especialidade)
                                                                                       ).getJson()))
+                .andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+
+        var jsonEsperado = dadosDetalhamentoConsultaJson.write(dadosDetalhamento).getJson();
+
+        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
+    }
+
+    @Test
+    @DisplayName("Deveria devolver codigo http 200 quando existir consulta")
+    @WithMockUser
+    void shouldReturnConsulta_whenExists() throws Exception {
+        var data = LocalDateTime.now().plusHours(1);
+        var especialidade = Especialidade.CARDIOLOGIA;
+
+        var dadosDetalhamento = new DadosDetalhamentoConsulta(2L, 5L, data, null);
+        when(consultaService.buscarAgendamento(any())).thenReturn(dadosDetalhamento);
+
+        var response = mvc.perform(get("/consultas/1")
+                                           .contentType(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
