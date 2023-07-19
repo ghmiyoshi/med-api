@@ -79,4 +79,9 @@ public class ConsultaService {
         return medico;
     }
 
+    public DadosDetalhamentoConsulta buscarAgendamento(final Long id) {
+        return consultaRepository.findById(id).map(DadosDetalhamentoConsulta::new).orElseThrow(
+                () -> new EntityNotFoundException("Consulta não encontrada"));
+    }
+
 }
