@@ -50,10 +50,10 @@
 
 * Configuração e utilização do **ObjectMapper** no toString() das models;<br>
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/domain/utils/ObjectMapperUtils.java
-  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/domain/utils/JsonAbstract.java
+  https://github.com/ghmiyoshi/med-api/blob/develop/src/main/java/br/com/alura/med/domain/JsonAbstract.java
 
 * Utilização de **Spring Event** para disparar eventos;<br>
-  https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/infra/event/EmailService.java
+  https://github.com/ghmiyoshi/med-api/blob/develop/src/main/java/br/com/alura/med/service/email/EmailService.java
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/service/consulta/ConsultaService.java
 
 * Criação de template ao abrir PRs e definição dos code owners do projeto;<br>
