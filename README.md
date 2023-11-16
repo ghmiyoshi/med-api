@@ -57,7 +57,7 @@
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/service/consulta/ConsultaService.java
 
 * Criação de template ao abrir PRs e definição dos code owners do projeto;<br>
-  https://github.com/ghmiyoshi/med-api/tree/main/.github
+  https://github.com/ghmiyoshi/med-api/tree/develop/.github
 
 * Configuração CI com GitHub Actions.<br>
-  https://github.com/ghmiyoshi/med-api/tree/main/.github/workflows
+  https://github.com/ghmiyoshi/med-api/tree/develop/.github/workflows
