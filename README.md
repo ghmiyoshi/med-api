@@ -1,7 +1,28 @@
-# API Rest com Java e Spring Boot
+## 1. Spring Boot 3: desenvolva uma API Rest em Java
+* Crie do zero uma API Rest em Java com Spring Boot;
+* Desenvolva CRUDs utilizando o banco de dados MySQL;
+* Utilize o Flyway como ferramenta de Migrations da API;
+* Realize validações utilizando o Bean Validation;
+* Realize paginação dos dados da API.
 
-### Conteúdos interessantes aprendidos neste curso:
+## 2. Spring Boot 3: aplique boas práticas e proteja uma API Rest
+* Padronize os retornos dos controllers da API;
+* Utilize os códigos HTTP corretamente;
+* Adicione o módulo Spring Security no projeto;
+* Implemente um mecanismo de autenticação na API;
+* Realize o controle de acesso na API;
+* Utilize Json Web Token para controlar o acesso na API.
 
+## 3. Spring Boot 3: documente, teste e prepare uma API para o deploy
+* Aprenda a isolar códigos de regras de negócio em uma aplicação;
+* Implemente princípios SOLID;
+* Documente uma API seguindo o padrão OpenAPI;
+* Saiba como escrever testes automatizados em uma aplicação com Spring Boot;
+* Realize o build de uma aplicação com Spring Boot;
+* Utilize variáveis de ambiente e prepare uma aplicação para o deploy.
+<br/>
+
+## Conteúdos interessantes aprendidos neste curso:
 * Criar validações e usar com o design pattern **strategy**;<br>
   https://github.com/ghmiyoshi/med-api/tree/main/src/main/java/br/com/alura/med/service/consulta/validacoes
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/service/consulta/ConsultaService.java
@@ -24,9 +45,9 @@
 
 * Gerar documentação da API com **Swagger 3** e configurar o header **JWT**<br>
   https://github.com/ghmiyoshi/med-api/blob/main/src/main/java/br/com/alura/med/config/doc/SpringDocConfig.java
+<br/>
 
-### Melhorias feitas:
-
+## Melhorias feitas:
 * Adicionar auditoria e revisão usando **Spring Data Envers**;<br>
   https://github.com/ghmiyoshi/med-api/tree/main/src/main/java/br/com/alura/med/domain/audit
 
