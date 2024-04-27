@@ -1,6 +1,8 @@
 package br.com.alura.med.domain.entities.medico;
 
 import br.com.alura.med.domain.entities.EnderecoValueObject;
+import br.com.alura.med.infra.persistence.MedicoEntity;
+import br.com.alura.med.naousar.domain.medico.Especialidade;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +14,12 @@ public class Medico {
     private String email;
     private String telefone;
     private String crm;
-    private String especialidade;
+    private Especialidade especialidade;
     private EnderecoValueObject endereco;
     private boolean ativo;
 
     public Medico(String nome, String email, String telefone, String crm,
-                  String especialidade,
+                  Especialidade especialidade,
                   EnderecoValueObject endereco) {
         this.nome = nome;
         this.email = email;
@@ -32,5 +34,14 @@ public class Medico {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+    }
+
+    public Medico(MedicoEntity medicoEntity) {
+        this.nome = medicoEntity.getNome();
+        this.email = medicoEntity.getEmail();
+        this.telefone = medicoEntity.getTelefone();
+        this.crm = medicoEntity.getCrm();
+        this.especialidade = medicoEntity.getEspecialidade();
+        this.ativo = true;
     }
 }

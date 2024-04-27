@@ -2,6 +2,7 @@ package br.com.alura.med.infra.persistence;
 
 import static java.util.Objects.nonNull;
 
+import br.com.alura.med.domain.entities.medico.Medico;
 import br.com.alura.med.naousar.domain.audit.Auditable;
 import br.com.alura.med.naousar.domain.endereco.Endereco;
 import br.com.alura.med.naousar.domain.medico.DadosAtualizacaoMedico;
@@ -63,6 +64,15 @@ public class MedicoEntity extends Auditable {
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
+    }
+
+    public MedicoEntity(Medico medico) {
+        this.nome = medico.getNome();
+        this.email = medico.getEmail();
+        this.telefone = medico.getTelefone();
+        this.crm = medico.getCrm();
+        this.especialidade = medico.getEspecialidade();
+        this.ativo = true;
     }
 
     public MedicoEntity atualizarInformacoes(DadosAtualizacaoMedico dados) {
