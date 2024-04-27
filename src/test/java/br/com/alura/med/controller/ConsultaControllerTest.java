@@ -1,9 +1,16 @@
 package br.com.alura.med.controller;
 
-import br.com.alura.med.domain.consulta.DadosAgendamentoConsulta;
-import br.com.alura.med.domain.consulta.DadosDetalhamentoConsulta;
-import br.com.alura.med.domain.medico.Especialidade;
-import br.com.alura.med.service.consulta.ConsultaService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
+import br.com.alura.med.naousar.domain.consulta.DadosDetalhamentoConsulta;
+import br.com.alura.med.naousar.domain.medico.Especialidade;
+import br.com.alura.med.naousar.service.consulta.ConsultaService;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +24,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -63,10 +62,10 @@ class ConsultaControllerTest {
         when(consultaService.agendar(any())).thenReturn(dadosDetalhamento);
 
         var response = mvc.perform(post("/consultas")
-                                           .contentType(MediaType.APPLICATION_JSON)
-                                           .content(dadosAgendamentoConsultaJson.write(
-                                                   new DadosAgendamentoConsulta(2L, 5L, data, especialidade)
-                                                                                      ).getJson()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(dadosAgendamentoConsultaJson.write(
+                                new DadosAgendamentoConsulta(2L, 5L, data, especialidade)
+                        ).getJson()))
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -87,7 +86,7 @@ class ConsultaControllerTest {
         when(consultaService.buscarAgendamento(any())).thenReturn(dadosDetalhamento);
 
         var response = mvc.perform(get("/consultas/1")
-                                           .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());

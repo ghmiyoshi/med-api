@@ -1,12 +1,13 @@
 package br.com.alura.med.domain.repository;
 
-import br.com.alura.med.domain.consulta.Consulta;
-import br.com.alura.med.domain.endereco.DadosEndereco;
-import br.com.alura.med.domain.medico.DadosCadastroMedico;
-import br.com.alura.med.domain.medico.Especialidade;
-import br.com.alura.med.domain.medico.Medico;
-import br.com.alura.med.domain.paciente.DadosCadastroPaciente;
-import br.com.alura.med.domain.paciente.Paciente;
+import br.com.alura.med.naousar.domain.consulta.Consulta;
+import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
+import br.com.alura.med.naousar.domain.medico.DadosCadastroMedico;
+import br.com.alura.med.naousar.domain.medico.Especialidade;
+import br.com.alura.med.naousar.domain.medico.Medico;
+import br.com.alura.med.naousar.domain.paciente.DadosCadastroPaciente;
+import br.com.alura.med.naousar.domain.paciente.Paciente;
+import br.com.alura.med.naousar.domain.repository.MedicoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +39,17 @@ class MedicoRepositoryTest {
     @DisplayName("Deveria devolver null quando unico medico cadastrado nao esta disponivel na data")
     void shouldReturnNull_whenMedicoItsNotAvailableInDate() {
         //given ou arrange
-        var proximaSegundaAs10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10, 0);
-        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456", Especialidade.CARDIOLOGIA);
+        var proximaSegundaAs10 =
+                LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10, 0);
+        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456",
+                Especialidade.CARDIOLOGIA);
         var paciente = cadastrarPaciente("Paciente", "paciente@email.com", "00000000000");
         cadastrarConsulta(medico, paciente, proximaSegundaAs10);
 
         //when ou act
-        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
-                                                                              proximaSegundaAs10);
+        var medicoLivre =
+                medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
+                proximaSegundaAs10);
 
         //then ou assert
         assertThat(medicoLivre).isNull();
@@ -55,12 +59,15 @@ class MedicoRepositoryTest {
     @DisplayName("Deveria devolver medico quando ele estiver disponivel na data")
     void shouldReturnMedico_whenItsAvailable() {
         //given ou arrange
-        var proximaSegundaAs10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10, 0);
-        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456", Especialidade.CARDIOLOGIA);
+        var proximaSegundaAs10 =
+                LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10, 0);
+        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456",
+                Especialidade.CARDIOLOGIA);
 
         //when ou act
-        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
-                                                                              proximaSegundaAs10);
+        var medicoLivre =
+                medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
+                proximaSegundaAs10);
 
         //then ou assert
         assertThat(medicoLivre).isEqualTo(medico);
@@ -70,7 +77,8 @@ class MedicoRepositoryTest {
         em.persist(new Consulta(null, medico, paciente, data));
     }
 
-    private Medico cadastrarMedico(String nome, String email, String crm, Especialidade especialidade) {
+    private Medico cadastrarMedico(String nome, String email, String crm,
+                                   Especialidade especialidade) {
         var medico = new Medico(dadosMedico(nome, email, crm, especialidade));
         em.persist(medico);
         return medico;
@@ -82,7 +90,8 @@ class MedicoRepositoryTest {
         return paciente;
     }
 
-    private DadosCadastroMedico dadosMedico(String nome, String email, String crm, Especialidade especialidade) {
+    private DadosCadastroMedico dadosMedico(String nome, String email, String crm,
+                                            Especialidade especialidade) {
         return new DadosCadastroMedico(
                 nome,
                 email,
