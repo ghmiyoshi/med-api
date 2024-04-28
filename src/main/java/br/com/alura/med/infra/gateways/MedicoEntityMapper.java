@@ -10,6 +10,7 @@ public class MedicoEntityMapper {
     }
 
     public Medico toDomain(MedicoEntity medicoEntity) {
-        return new Medico(medicoEntity);
+        return new Medico(medicoEntity.getNome(), medicoEntity.getEmail(),
+                medicoEntity.getTelefone());
     }
 }

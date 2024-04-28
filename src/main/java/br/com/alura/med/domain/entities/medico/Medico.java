@@ -1,8 +1,6 @@
 package br.com.alura.med.domain.entities.medico;
 
-import br.com.alura.med.domain.entities.EnderecoValueObject;
-import br.com.alura.med.infra.persistence.MedicoEntity;
-import br.com.alura.med.naousar.domain.medico.Especialidade;
+import br.com.alura.med.domain.EnderecoValueObject;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,14 +32,5 @@ public class Medico {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-    }
-
-    public Medico(MedicoEntity medicoEntity) {
-        this.nome = medicoEntity.getNome();
-        this.email = medicoEntity.getEmail();
-        this.telefone = medicoEntity.getTelefone();
-        this.crm = medicoEntity.getCrm();
-        this.especialidade = medicoEntity.getEspecialidade();
-        this.ativo = true;
     }
 }

@@ -6,9 +6,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import br.com.alura.med.domain.entities.medico.Especialidade;
 import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
 import br.com.alura.med.naousar.domain.consulta.DadosDetalhamentoConsulta;
-import br.com.alura.med.naousar.domain.medico.Especialidade;
 import br.com.alura.med.naousar.service.consulta.ConsultaService;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;

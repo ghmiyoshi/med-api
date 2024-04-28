@@ -1,5 +1,7 @@
-package br.com.alura.med.naousar.domain.medico;
+package br.com.alura.med.infra.controller.request;
 
+import br.com.alura.med.domain.entities.medico.Especialidade;
+import br.com.alura.med.domain.entities.medico.Medico;
 import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
 import br.com.alura.med.naousar.domain.utils.ObjectMapperUtils;
 import jakarta.validation.Valid;
@@ -23,8 +25,7 @@ public record DadosCadastroMedico(@NotBlank(message = "Nome é obrigatório") St
                                   @Valid DadosEndereco endereco) {
 
     public Medico converterParaMedico() {
-        return new Medico(nome, email, telefone, crm, especialidade,
-                endereco.converterParaEndereco());
+        return new Medico(nome, email, telefone);
     }
 
     @Override

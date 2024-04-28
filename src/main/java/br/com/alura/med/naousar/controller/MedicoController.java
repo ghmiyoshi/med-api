@@ -1,9 +1,9 @@
 package br.com.alura.med.naousar.controller;
 
 import br.com.alura.med.config.cache.CachingConfig;
+import br.com.alura.med.infra.controller.request.DadosCadastroMedico;
+import br.com.alura.med.infra.controller.response.DadosDetalhamentoMedico;
 import br.com.alura.med.naousar.domain.medico.DadosAtualizacaoMedico;
-import br.com.alura.med.naousar.domain.medico.DadosCadastroMedico;
-import br.com.alura.med.naousar.domain.medico.DadosDetalhamentoMedico;
 import br.com.alura.med.naousar.domain.medico.DadosListagemMedico;
 import br.com.alura.med.naousar.domain.repository.MedicoRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

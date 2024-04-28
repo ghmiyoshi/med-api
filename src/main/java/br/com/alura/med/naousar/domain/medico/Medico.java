@@ -1,16 +1,25 @@
 package br.com.alura.med.naousar.domain.medico;
 
+import static java.util.Objects.nonNull;
+
+import br.com.alura.med.domain.entities.medico.Especialidade;
+import br.com.alura.med.infra.controller.request.DadosCadastroMedico;
 import br.com.alura.med.naousar.domain.audit.Auditable;
 import br.com.alura.med.naousar.domain.endereco.Endereco;
-import jakarta.persistence.*;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-
-import static java.util.Objects.nonNull;
 
 @Getter
 @NoArgsConstructor

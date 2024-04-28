@@ -1,4 +1,4 @@
-package br.com.alura.med.domain.entities;
+package br.com.alura.med.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

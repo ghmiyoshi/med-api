@@ -1,26 +1,25 @@
 package br.com.alura.med.domain.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import br.com.alura.med.domain.entities.medico.Especialidade;
+import br.com.alura.med.infra.controller.request.DadosCadastroMedico;
 import br.com.alura.med.naousar.domain.consulta.Consulta;
 import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
-import br.com.alura.med.naousar.domain.medico.DadosCadastroMedico;
-import br.com.alura.med.naousar.domain.medico.Especialidade;
 import br.com.alura.med.naousar.domain.medico.Medico;
 import br.com.alura.med.naousar.domain.paciente.DadosCadastroPaciente;
 import br.com.alura.med.naousar.domain.paciente.Paciente;
 import br.com.alura.med.naousar.domain.repository.MedicoRepository;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DataJpaTest
@@ -49,7 +48,7 @@ class MedicoRepositoryTest {
         //when ou act
         var medicoLivre =
                 medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
-                proximaSegundaAs10);
+                        proximaSegundaAs10);
 
         //then ou assert
         assertThat(medicoLivre).isNull();
@@ -67,7 +66,7 @@ class MedicoRepositoryTest {
         //when ou act
         var medicoLivre =
                 medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
-                proximaSegundaAs10);
+                        proximaSegundaAs10);
 
         //then ou assert
         assertThat(medicoLivre).isEqualTo(medico);

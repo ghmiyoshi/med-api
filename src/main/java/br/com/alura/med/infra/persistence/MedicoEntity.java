@@ -2,12 +2,12 @@ package br.com.alura.med.infra.persistence;
 
 import static java.util.Objects.nonNull;
 
+import br.com.alura.med.domain.entities.medico.Especialidade;
 import br.com.alura.med.domain.entities.medico.Medico;
+import br.com.alura.med.infra.controller.request.DadosCadastroMedico;
 import br.com.alura.med.naousar.domain.audit.Auditable;
 import br.com.alura.med.naousar.domain.endereco.Endereco;
 import br.com.alura.med.naousar.domain.medico.DadosAtualizacaoMedico;
-import br.com.alura.med.naousar.domain.medico.DadosCadastroMedico;
-import br.com.alura.med.naousar.domain.medico.Especialidade;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,6 +1,6 @@
 package br.com.alura.med.domain.entities.medico;
 
-import br.com.alura.med.domain.entities.EnderecoValueObject;
+import br.com.alura.med.domain.EnderecoValueObject;
 
 public class FabricaDeMedico {
 

@@ -1,5 +1,7 @@
 package br.com.alura.med.naousar.domain.medico;
 
+import br.com.alura.med.domain.entities.medico.Especialidade;
+
 public record DadosListagemMedico(String nome,
                                   String email,
                                   String crm,
