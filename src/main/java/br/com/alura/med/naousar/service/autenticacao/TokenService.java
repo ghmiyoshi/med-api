@@ -1,6 +1,6 @@
 package br.com.alura.med.naousar.service.autenticacao;
 
-import br.com.alura.med.naousar.domain.usuario.Usuario;
+import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -19,13 +19,13 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String gerarToken(final Usuario usuario) {
+    public String gerarToken(final UsuarioEntity usuarioEntity) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API med")
-                    .withSubject(usuario.getLogin())
-                    .withClaim("id", usuario.getId()) // Para adicionar mais
+                    .withSubject(usuarioEntity.getLogin())
+                    .withClaim("id", usuarioEntity.getId()) // Para adicionar mais
                     // informacoes no token
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);

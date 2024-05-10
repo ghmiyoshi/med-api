@@ -3,13 +3,15 @@ package br.com.alura.med.application.usecases;
 import br.com.alura.med.application.gateways.RepositorioDeMedico;
 import br.com.alura.med.domain.entities.medico.Medico;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @RequiredArgsConstructor
-public class CriarMedico {
+public class ListarMedicos {
 
     private final RepositorioDeMedico repositorio;
 
-    public Medico execute(Medico medico) {
-        return repositorio.cadastrarMedico(medico);
+    public Page<Medico> execute(Pageable pageable) {
+        return repositorio.buscarTodos(pageable);
     }
 }

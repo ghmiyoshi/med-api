@@ -1,7 +1,7 @@
 package br.com.alura.med.naousar.service.autenticacao;
 
-import br.com.alura.med.naousar.domain.repository.UsuarioRepository;
-import br.com.alura.med.naousar.domain.usuario.Usuario;
+import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
+import br.com.alura.med.infra.persistence.usuario.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +14,7 @@ public class AutenticacaoService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario loadUserByUsername(final String username) throws UsernameNotFoundException {
+    public UsuarioEntity loadUserByUsername(final String username) throws UsernameNotFoundException {
         return usuarioRepository.findByLogin(username).orElseThrow(
                 () -> new RuntimeException("Usuário não encontrado"));
     }

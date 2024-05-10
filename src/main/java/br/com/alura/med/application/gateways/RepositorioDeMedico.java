@@ -1,15 +1,18 @@
 package br.com.alura.med.application.gateways;
 
 import br.com.alura.med.domain.entities.medico.Medico;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface RepositorioDeMedico {
 
     Medico cadastrarMedico(Medico medico);
 
-    List<Medico> buscarTodos();
+    Page<Medico> buscarTodos(Pageable pageable);
 
-    Medico atualizarMedico(Medico medico);
+    Medico atualizarMedico(Long id, Medico medico);
 
     void excluirMedico(Long id);
+
+    Medico buscarMedico(Long id);
 }

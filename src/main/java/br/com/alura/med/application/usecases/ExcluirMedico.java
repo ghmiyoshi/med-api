@@ -1,15 +1,14 @@
 package br.com.alura.med.application.usecases;
 
 import br.com.alura.med.application.gateways.RepositorioDeMedico;
-import br.com.alura.med.domain.entities.medico.Medico;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CriarMedico {
+public class ExcluirMedico {
 
     private final RepositorioDeMedico repositorio;
 
-    public Medico execute(Medico medico) {
-        return repositorio.cadastrarMedico(medico);
+    public void execute(Long id) {
+        repositorio.excluirMedico(id);
     }
 }

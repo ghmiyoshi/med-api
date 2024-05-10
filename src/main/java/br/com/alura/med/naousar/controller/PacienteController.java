@@ -1,11 +1,11 @@
 package br.com.alura.med.naousar.controller;
 
+import br.com.alura.med.infra.persistence.paciente.PacienteRepository;
 import br.com.alura.med.naousar.domain.paciente.DadosAtualizacaoPaciente;
 import br.com.alura.med.naousar.domain.paciente.DadosCadastroPaciente;
 import br.com.alura.med.naousar.domain.paciente.DadosDetalhamentoPaciente;
 import br.com.alura.med.naousar.domain.paciente.DadosListagemPaciente;
 import br.com.alura.med.naousar.domain.paciente.Paciente;
-import br.com.alura.med.naousar.domain.repository.PacienteRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

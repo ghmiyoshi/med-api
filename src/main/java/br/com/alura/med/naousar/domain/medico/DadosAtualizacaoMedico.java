@@ -1,7 +1,7 @@
 package br.com.alura.med.naousar.domain.medico;
 
-import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
-import br.com.alura.med.naousar.domain.utils.ObjectMapperUtils;
+import br.com.alura.med.infra.controllers.requests.DadosEndereco;
+import br.com.alura.med.infra.utils.ObjectMapperUtils;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoMedico(@NotNull Long id,

@@ -1,7 +1,7 @@
 package br.com.alura.med.naousar.controller;
 
+import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
 import br.com.alura.med.naousar.domain.usuario.DadosAutenticacao;
-import br.com.alura.med.naousar.domain.usuario.Usuario;
 import br.com.alura.med.naousar.infra.security.DadosTokenJwt;
 import br.com.alura.med.naousar.service.autenticacao.TokenService;
 import jakarta.validation.Valid;
@@ -30,7 +30,7 @@ public class AutenticacaoController {
         var authentication = authenticationManager.authenticate(authenticationToken);
         log.info("{}::efetuarLogin - Usuário autenticado", getClass().getSimpleName());
 
-        var tokenJwt = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+        var tokenJwt = tokenService.gerarToken((UsuarioEntity) authentication.getPrincipal());
         log.info("{}::efetuarLogin - Token gerado com sucesso", getClass().getSimpleName());
         return new DadosTokenJwt(tokenJwt);
     }

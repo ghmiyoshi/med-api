@@ -1,6 +1,6 @@
 package br.com.alura.med.naousar.domain.paciente;
 
-import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
+import br.com.alura.med.infra.controllers.requests.DadosEndereco;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.constraints.NotNull;

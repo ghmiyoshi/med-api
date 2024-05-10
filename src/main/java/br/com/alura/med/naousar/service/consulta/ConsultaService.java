@@ -3,13 +3,13 @@ package br.com.alura.med.naousar.service.consulta;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
+import br.com.alura.med.infra.persistence.consulta.ConsultaRepository;
+import br.com.alura.med.infra.persistence.medico.MedicoEntity;
+import br.com.alura.med.infra.persistence.medico.MedicoRepository;
+import br.com.alura.med.infra.persistence.paciente.PacienteRepository;
 import br.com.alura.med.naousar.domain.consulta.Consulta;
 import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
 import br.com.alura.med.naousar.domain.consulta.DadosDetalhamentoConsulta;
-import br.com.alura.med.naousar.domain.medico.Medico;
-import br.com.alura.med.naousar.domain.repository.ConsultaRepository;
-import br.com.alura.med.naousar.domain.repository.MedicoRepository;
-import br.com.alura.med.naousar.domain.repository.PacienteRepository;
 import br.com.alura.med.naousar.infra.event.ConsultaEvent;
 import br.com.alura.med.naousar.infra.handler.ValidacaoException;
 import br.com.alura.med.naousar.service.consulta.validacoes.ValidadorAgendamentoDeConsulta;
@@ -56,7 +56,7 @@ public class ConsultaService {
         return new DadosDetalhamentoConsulta(consulta);
     }
 
-    private Medico escolherMedico(final DadosAgendamentoConsulta dados) {
+    private MedicoEntity escolherMedico(final DadosAgendamentoConsulta dados) {
         if (nonNull(dados.idMedico())) {
             log.info("{}::escolherMedico - Busca médico: {}", getClass().getSimpleName(),
                     dados.idMedico());

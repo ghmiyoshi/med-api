@@ -5,11 +5,11 @@ import br.com.alura.med.domain.entities.medico.Medico;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CriarMedico {
+public class BuscarMedicos {
 
     private final RepositorioDeMedico repositorio;
 
-    public Medico execute(Medico medico) {
-        return repositorio.cadastrarMedico(medico);
+    public Medico execute(Long id) {
+        return repositorio.buscarMedico(id);
     }
 }

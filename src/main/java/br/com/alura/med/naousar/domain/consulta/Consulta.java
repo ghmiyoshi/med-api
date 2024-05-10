@@ -1,8 +1,8 @@
 package br.com.alura.med.naousar.domain.consulta;
 
-import br.com.alura.med.naousar.domain.medico.Medico;
+import br.com.alura.med.infra.persistence.medico.MedicoEntity;
+import br.com.alura.med.infra.utils.JsonAbstract;
 import br.com.alura.med.naousar.domain.paciente.Paciente;
-import br.com.alura.med.naousar.domain.utils.JsonAbstract;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +31,7 @@ public class Consulta extends JsonAbstract {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medico_id")
-    private Medico medico;
+    private MedicoEntity medico;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id")

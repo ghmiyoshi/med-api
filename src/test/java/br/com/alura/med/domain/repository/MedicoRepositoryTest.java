@@ -1,15 +1,13 @@
 package br.com.alura.med.domain.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import br.com.alura.med.domain.entities.medico.Especialidade;
-import br.com.alura.med.infra.controller.request.DadosCadastroMedico;
+import br.com.alura.med.domain.entities.medico.Medico;
+import br.com.alura.med.infra.controllers.requests.DadosCadastroMedico;
+import br.com.alura.med.infra.controllers.requests.DadosEndereco;
+import br.com.alura.med.infra.persistence.medico.MedicoRepository;
 import br.com.alura.med.naousar.domain.consulta.Consulta;
-import br.com.alura.med.naousar.domain.endereco.DadosEndereco;
-import br.com.alura.med.naousar.domain.medico.Medico;
 import br.com.alura.med.naousar.domain.paciente.DadosCadastroPaciente;
 import br.com.alura.med.naousar.domain.paciente.Paciente;
-import br.com.alura.med.naousar.domain.repository.MedicoRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

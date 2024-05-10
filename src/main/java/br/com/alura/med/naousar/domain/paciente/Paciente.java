@@ -2,8 +2,8 @@ package br.com.alura.med.naousar.domain.paciente;
 
 import static java.util.Objects.nonNull;
 
-import br.com.alura.med.naousar.domain.endereco.Endereco;
-import br.com.alura.med.naousar.domain.utils.JsonAbstract;
+import br.com.alura.med.infra.persistence.medico.EnderecoEntity;
+import br.com.alura.med.infra.utils.JsonAbstract;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +34,7 @@ public class Paciente extends JsonAbstract {
     private String cpf;
 
     @Embedded
-    private Endereco endereco;
+    private EnderecoEntity endereco;
 
     private boolean ativo;
 
@@ -44,7 +44,7 @@ public class Paciente extends JsonAbstract {
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.cpf = dados.cpf();
-        this.endereco = new Endereco(dados.endereco());
+        this.endereco = new EnderecoEntity(dados.endereco());
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
@@ -55,7 +55,7 @@ public class Paciente extends JsonAbstract {
             this.telefone = dados.telefone();
         }
         if (nonNull(dados.endereco())) {
-            this.endereco.atualizarInformacoes(dados.endereco());
+            //this.endereco.atualizarInformacoes(dados.endereco());
         }
     }
 
