@@ -2,9 +2,9 @@ package br.com.alura.med.naousar.service.consulta.validacoes;
 
 import static java.util.Objects.isNull;
 
+import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
+import br.com.alura.med.infra.handler.ValidacaoException;
 import br.com.alura.med.infra.persistence.medico.MedicoRepository;
-import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
-import br.com.alura.med.naousar.infra.handler.ValidacaoException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

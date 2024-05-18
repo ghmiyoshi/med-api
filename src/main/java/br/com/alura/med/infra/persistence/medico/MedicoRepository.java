@@ -15,7 +15,7 @@ public interface MedicoRepository extends JpaRepository<MedicoEntity, Long> {
              SELECT m FROM MedicoEntity m
              WHERE m.ativo = true AND m.especialidade = :especialidade
              AND m.id NOT IN (
-                SELECT c.medico.id FROM Consulta c WHERE c.data = :data
+                SELECT c.medico.id FROM ConsultaEntity c WHERE c.data = :data
              )
              ORDER BY RAND() limit 1
             """)
@@ -23,4 +23,6 @@ public interface MedicoRepository extends JpaRepository<MedicoEntity, Long> {
                                                     LocalDateTime data);
 
     boolean existsByIdAndAtivo(Long idMedico, boolean isAtivo);
+
+    boolean existsByCrm(String crm);
 }

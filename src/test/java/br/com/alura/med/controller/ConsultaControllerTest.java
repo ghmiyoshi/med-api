@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import br.com.alura.med.domain.entities.medico.Especialidade;
-import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
-import br.com.alura.med.naousar.domain.consulta.DadosDetalhamentoConsulta;
+import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
+import br.com.alura.med.infra.controllers.responses.DadosDetalhamentoConsulta;
 import br.com.alura.med.naousar.service.consulta.ConsultaService;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;

@@ -1,16 +1,16 @@
 package br.com.alura.med.infra.controllers;
 
-import br.com.alura.med.application.usecases.AtualizarMedico;
-import br.com.alura.med.application.usecases.BuscarMedicos;
-import br.com.alura.med.application.usecases.CriarMedico;
-import br.com.alura.med.application.usecases.ExcluirMedico;
-import br.com.alura.med.application.usecases.ListarMedicos;
+import br.com.alura.med.application.usecases.medico.AtualizarMedico;
+import br.com.alura.med.application.usecases.medico.BuscarMedico;
+import br.com.alura.med.application.usecases.medico.CriarMedico;
+import br.com.alura.med.application.usecases.medico.ExcluirMedico;
+import br.com.alura.med.application.usecases.medico.ListarMedicos;
 import br.com.alura.med.config.CachingConfig;
 import br.com.alura.med.infra.controllers.mappers.MedicoMapper;
+import br.com.alura.med.infra.controllers.requests.DadosAtualizacaoMedico;
 import br.com.alura.med.infra.controllers.requests.DadosCadastroMedico;
 import br.com.alura.med.infra.controllers.responses.DadosDetalhamentoMedico;
 import br.com.alura.med.infra.controllers.responses.DadosListagemMedico;
-import br.com.alura.med.naousar.domain.medico.DadosAtualizacaoMedico;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -42,7 +42,7 @@ public class MedicoController {
 
     private CriarMedico criarMedico;
     private ListarMedicos listarMedicos;
-    private BuscarMedicos buscarMedicos;
+    private BuscarMedico buscarMedico;
     private AtualizarMedico atualizarMedico;
     private ExcluirMedico excluirMedico;
     private MedicoMapper medicoMapper;
@@ -73,7 +73,7 @@ public class MedicoController {
     public DadosDetalhamentoMedico atualizar(@RequestBody @Valid final DadosAtualizacaoMedico
                                                      dados) {
         log.info("{}::atualizar - Dados recebidos: {}", getClass().getSimpleName(), dados);
-        var medico = buscarMedicos.execute(dados.id());
+        var medico = buscarMedico.execute(dados.id());
         medico = atualizarMedico.execute(dados.id(), medico);
         log.info("{}::atualizar - Dados atualizados: {}", getClass().getSimpleName(), dados);
         return medicoMapper.toResponseDetalhamento(medico);
@@ -91,7 +91,7 @@ public class MedicoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public DadosDetalhamentoMedico detalhar(@PathVariable final Long id) {
-        var medico = buscarMedicos.execute(id);
+        var medico = buscarMedico.execute(id);
         log.info("{}::detalhar - Detalhes do médico: {}", getClass().getSimpleName(),
                 medico);
         return medicoMapper.toResponseDetalhamento(medico);

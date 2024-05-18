@@ -3,15 +3,15 @@ package br.com.alura.med.naousar.service.consulta;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
+import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
+import br.com.alura.med.infra.controllers.responses.DadosDetalhamentoConsulta;
+import br.com.alura.med.infra.event.ConsultaEvent;
+import br.com.alura.med.infra.handler.ValidacaoException;
+import br.com.alura.med.infra.persistence.consulta.ConsultaEntity;
 import br.com.alura.med.infra.persistence.consulta.ConsultaRepository;
 import br.com.alura.med.infra.persistence.medico.MedicoEntity;
 import br.com.alura.med.infra.persistence.medico.MedicoRepository;
 import br.com.alura.med.infra.persistence.paciente.PacienteRepository;
-import br.com.alura.med.naousar.domain.consulta.Consulta;
-import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
-import br.com.alura.med.naousar.domain.consulta.DadosDetalhamentoConsulta;
-import br.com.alura.med.naousar.infra.event.ConsultaEvent;
-import br.com.alura.med.naousar.infra.handler.ValidacaoException;
 import br.com.alura.med.naousar.service.consulta.validacoes.ValidadorAgendamentoDeConsulta;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,7 +43,7 @@ public class ConsultaService {
 
         validacoesAgendamentoDeConsulta.forEach(validacao -> validacao.validar(dados));
 
-        var consulta = new Consulta(null, medico, paciente, dados.data());
+        var consulta = new ConsultaEntity(null, medico, paciente, dados.data());
         consulta = consultaRepository.save(consulta);
 
         try {
@@ -53,7 +53,8 @@ public class ConsultaService {
             throw new RuntimeException(e);
         }
         applicationEventPublisher.publishEvent(new ConsultaEvent(consulta));
-        return new DadosDetalhamentoConsulta(consulta);
+//        return new DadosDetalhamentoConsulta(consulta);
+        return null;
     }
 
     private MedicoEntity escolherMedico(final DadosAgendamentoConsulta dados) {
@@ -84,8 +85,10 @@ public class ConsultaService {
     }
 
     public DadosDetalhamentoConsulta buscarAgendamento(final Long id) {
-        return consultaRepository.findById(id).map(DadosDetalhamentoConsulta::new).orElseThrow(
-                () -> new EntityNotFoundException("Consulta não encontrada"));
+        return null;
+        //        return consultaRepository.findById(id).map(DadosDetalhamentoConsulta::new)
+        //        .orElseThrow(
+//                () -> new EntityNotFoundException("Consulta não encontrada"));
     }
 
 }

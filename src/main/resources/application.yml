@@ -26,6 +26,11 @@ spring:
     property-naming-strategy: SNAKE_CASE
     deserialization:
       fail-on-unknown-properties: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 
 api:
   security:

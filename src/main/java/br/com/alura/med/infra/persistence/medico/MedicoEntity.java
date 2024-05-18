@@ -62,7 +62,6 @@ public class MedicoEntity extends Auditable {
         if (nonNull(endereco)) {
             this.endereco.atualizarInformacoes(endereco);
         }
-
         return this;
     }
 

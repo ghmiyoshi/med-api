@@ -1,13 +1,13 @@
 package br.com.alura.med.naousar.service.autenticacao;
 
+import br.com.alura.med.infra.handler.TokenInvalidoException;
 import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class TokenService {
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Erro ao gerar o token jwt!", exception);
+            throw new TokenInvalidoException("Erro ao gerar o token jwt!");
         }
     }
 
@@ -43,12 +43,11 @@ public class TokenService {
                     .verify(tokenJwt)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            throw new RuntimeException("Token JWT inválido ou expirado!");
+            throw new TokenInvalidoException("Token JWT inválido ou expirado!");
         }
     }
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().atZone(ZoneId.of(ZONE_ID)).plusHours(2).toInstant();
+        return Instant.now().plus(Duration.ofHours(2));
     }
-
 }

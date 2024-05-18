@@ -6,7 +6,7 @@ import br.com.alura.med.infra.persistence.medico.EnderecoEntity;
 
 public class EnderecoMapper {
 
-    public EnderecoEntity toEntity(EnderecoValueObject enderecoValueObject) {
+    public EnderecoEntity toEntity(final EnderecoValueObject enderecoValueObject) {
         return new EnderecoEntity(enderecoValueObject.getLogradouro(),
                 enderecoValueObject.getBairro(),
                 enderecoValueObject.getCep(), enderecoValueObject.getCidade(),
@@ -14,7 +14,7 @@ public class EnderecoMapper {
                 enderecoValueObject.getComplemento(), enderecoValueObject.getNumero());
     }
 
-    public EnderecoValueObject toDomain(EnderecoEntity enderecoEntity) {
+    public EnderecoValueObject toDomain(final EnderecoEntity enderecoEntity) {
         return new EnderecoValueObject(enderecoEntity.getLogradouro(),
                 enderecoEntity.getBairro(),
                 enderecoEntity.getCep(), enderecoEntity.getCidade(),
@@ -22,7 +22,7 @@ public class EnderecoMapper {
                 enderecoEntity.getComplemento(), enderecoEntity.getNumero());
     }
 
-    public EnderecoValueObject toDomain(DadosEndereco endereco) {
+    public EnderecoValueObject toDomain(final DadosEndereco endereco) {
         return new EnderecoValueObject(endereco.logradouro(),
                 endereco.bairro(),
                 endereco.cep(), endereco.cidade(),
@@ -30,19 +30,11 @@ public class EnderecoMapper {
                 endereco.complemento(), endereco.numero());
     }
 
-    public DadosEndereco toResponse(EnderecoValueObject endereco) {
+    public DadosEndereco toResponse(final EnderecoValueObject endereco) {
         return new DadosEndereco(endereco.getLogradouro(),
                 endereco.getBairro(),
                 endereco.getCep(), endereco.getCidade(),
                 endereco.getUf(),
                 endereco.getComplemento(), endereco.getNumero());
-    }
-
-    public EnderecoEntity toEntity(DadosEndereco endereco) {
-        return new EnderecoEntity(endereco.logradouro(),
-                endereco.bairro(),
-                endereco.cep(), endereco.cidade(),
-                endereco.uf(),
-                endereco.complemento(), endereco.numero());
     }
 }

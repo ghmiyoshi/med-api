@@ -1,6 +1,7 @@
 package br.com.alura.med.config;
 
-import br.com.alura.med.naousar.infra.security.SecurityFilter;
+import br.com.alura.med.infra.handler.UnauthorizedHandler;
+import br.com.alura.med.infra.security.SecurityFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
+    private final UnauthorizedHandler unauthorizedHandler;
 
     /* Desabilita a seguranca do Spring */
     @Bean
@@ -31,6 +33,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated().and()
                         .addFilterBefore(securityFilter,
                                 UsernamePasswordAuthenticationFilter.class))
+                //sobrescrevendo tratador de erros do Security:
+                .exceptionHandling(
+                        exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .build();
     }
 

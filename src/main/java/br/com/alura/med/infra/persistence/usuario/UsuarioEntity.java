@@ -73,5 +73,4 @@ public class UsuarioEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

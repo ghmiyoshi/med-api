@@ -2,7 +2,6 @@ package br.com.alura.med.infra.persistence.medico;
 
 import static java.util.Objects.nonNull;
 
-import br.com.alura.med.domain.EnderecoValueObject;
 import br.com.alura.med.infra.controllers.requests.DadosEndereco;
 import br.com.alura.med.infra.utils.JsonAbstract;
 import jakarta.persistence.Embeddable;
@@ -34,16 +33,6 @@ public class EnderecoEntity extends JsonAbstract {
         this.complemento = dados.complemento();
     }
 
-    public EnderecoEntity(EnderecoValueObject endereco) {
-        this.logradouro = endereco.getLogradouro();
-        this.bairro = endereco.getBairro();
-        this.cep = endereco.getCep();
-        this.uf = endereco.getUf();
-        this.cidade = endereco.getCidade();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-    }
-
     public void atualizarInformacoes(EnderecoEntity enderecoEntity) {
         if (nonNull(enderecoEntity.getLogradouro())) {
             this.logradouro = enderecoEntity.getLogradouro();
@@ -67,5 +56,4 @@ public class EnderecoEntity extends JsonAbstract {
             this.numero = enderecoEntity.getNumero();
         }
     }
-
 }

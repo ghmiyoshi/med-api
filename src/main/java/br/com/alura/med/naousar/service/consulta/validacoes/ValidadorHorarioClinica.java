@@ -1,7 +1,7 @@
 package br.com.alura.med.naousar.service.consulta.validacoes;
 
-import br.com.alura.med.naousar.domain.consulta.DadosAgendamentoConsulta;
-import br.com.alura.med.naousar.infra.handler.ValidacaoException;
+import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
+import br.com.alura.med.infra.handler.ValidacaoException;
 import java.time.DayOfWeek;
 import org.springframework.stereotype.Component;
 

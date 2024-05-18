@@ -1,5 +1,6 @@
 package br.com.alura.med.infra.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,6 +24,16 @@ public class ObjectMapperUtils {
         }
     }
 
+    public static String writeObjectInJsonWithNullFields(final Object object) {
+        try {
+            ObjectMapper objectMapper = OBJECT_MAPPER;
+            objectMapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static ObjectMapper objectMapper() {
         var objectMapper = new ObjectMapper();
         var javaTimeModule = new JavaTimeModule();
@@ -33,5 +44,4 @@ public class ObjectMapperUtils {
         objectMapper.registerModule(javaTimeModule);
         return objectMapper;
     }
-
 }
