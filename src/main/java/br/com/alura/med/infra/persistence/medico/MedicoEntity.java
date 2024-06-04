@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Audited
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_medicos")

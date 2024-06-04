@@ -1,11 +1,15 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:meddb
+    url: jdbc:h2:mem:meddb;NON_KEYWORDS=user
     username: root
     password: root
+  test:
+    database:
+      replace: none
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
+    defer-datasource-initialization: true # Utilizar somente para testes
   flyway:
     enabled: false

@@ -2,6 +2,7 @@ package br.com.alura.med.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -59,7 +60,7 @@ class ConsultaControllerTest {
         var especialidade = Especialidade.CARDIOLOGIA;
 
         var dadosDetalhamento = new DadosDetalhamentoConsulta(2L, 5L, data, null);
-        when(consultaService.agendar(any())).thenReturn(dadosDetalhamento);
+        when(consultaService.agendar(any(DadosAgendamentoConsulta.class))).thenReturn(dadosDetalhamento);
 
         var response = mvc.perform(post("/consultas")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -83,7 +84,7 @@ class ConsultaControllerTest {
         var especialidade = Especialidade.CARDIOLOGIA;
 
         var dadosDetalhamento = new DadosDetalhamentoConsulta(2L, 5L, data, null);
-        when(consultaService.buscarAgendamento(any())).thenReturn(dadosDetalhamento);
+        when(consultaService.buscarAgendamento(anyLong())).thenReturn(dadosDetalhamento);
 
         var response = mvc.perform(get("/consultas/1")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -95,5 +96,4 @@ class ConsultaControllerTest {
 
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
-
 }
