@@ -10,6 +10,6 @@ public class AtualizarMedico {
     private final RepositorioMedico repositorio;
 
     public Medico execute(Long id, Medico medico) {
-        return repositorio.atualizarMedico(id, medico);
+        return repositorio.atualizar(id, medico);
     }
 }

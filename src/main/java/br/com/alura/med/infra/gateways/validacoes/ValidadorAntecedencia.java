@@ -1,5 +1,6 @@
-package br.com.alura.med.naousar.service.consulta.validacoes;
+package br.com.alura.med.infra.gateways.validacoes;
 
+import br.com.alura.med.application.gateways.ValidadorAgendamentoDeConsulta;
 import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
 import br.com.alura.med.infra.handler.ValidacaoException;
 import java.time.Duration;

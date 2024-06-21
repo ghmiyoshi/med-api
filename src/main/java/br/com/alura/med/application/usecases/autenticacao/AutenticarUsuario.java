@@ -1,4 +1,4 @@
-package br.com.alura.med.naousar.service.autenticacao;
+package br.com.alura.med.application.usecases.autenticacao;
 
 import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
 import br.com.alura.med.infra.persistence.usuario.UsuarioRepository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-public class AutenticacaoService implements UserDetailsService {
+public class AutenticarUsuario implements UserDetailsService {
 
     private UsuarioRepository usuarioRepository;
 

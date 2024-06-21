@@ -8,5 +8,4 @@ public class ValidacaoException extends ResponseStatusException {
     public ValidacaoException(final String mensagem) {
         super(HttpStatus.BAD_REQUEST, mensagem);
     }
-
 }

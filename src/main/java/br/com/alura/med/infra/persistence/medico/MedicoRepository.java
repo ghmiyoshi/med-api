@@ -2,6 +2,7 @@ package br.com.alura.med.infra.persistence.medico;
 
 import br.com.alura.med.domain.entities.medico.Especialidade;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,8 +20,8 @@ public interface MedicoRepository extends JpaRepository<MedicoEntity, Long> {
              )
              ORDER BY RAND() limit 1
             """)
-    MedicoEntity escolherMedicoAleatorioLivreNaData(Especialidade especialidade,
-                                                    LocalDateTime data);
+    Optional<MedicoEntity> escolherMedicoAleatorioLivreNaData(Especialidade especialidade,
+                                                              LocalDateTime data);
 
     boolean existsByIdAndAtivo(Long idMedico, boolean isAtivo);
 

@@ -2,11 +2,15 @@ package br.com.alura.med.infra.gateways;
 
 import br.com.alura.med.application.gateways.RepositorioMedico;
 import br.com.alura.med.domain.EnderecoValueObject;
+import br.com.alura.med.domain.entities.medico.Especialidade;
 import br.com.alura.med.domain.entities.medico.Medico;
 import br.com.alura.med.infra.controllers.mappers.EnderecoMapper;
 import br.com.alura.med.infra.controllers.mappers.MedicoMapper;
 import br.com.alura.med.infra.persistence.medico.MedicoEntity;
 import br.com.alura.med.infra.persistence.medico.MedicoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +25,7 @@ public class RepositorioMedicoJpa implements RepositorioMedico {
     private final EnderecoMapper enderecoMapper;
 
     @Override
-    public Medico cadastrarMedico(final Medico medico) {
+    public Medico cadastrar(final Medico medico) {
         if (repository.existsByCrm(medico.getCrm())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Médico já cadastrado");
@@ -37,7 +41,7 @@ public class RepositorioMedicoJpa implements RepositorioMedico {
     }
 
     @Override
-    public Medico atualizarMedico(final Long id, final Medico medico) {
+    public Medico atualizar(final Long id, final Medico medico) {
         EnderecoValueObject endereco = medico.getEndereco();
         var medicoEntity = buscarMedicoEntity(id);
         medicoEntity.atualizarInformacoes(medico.getNome(), medico.getTelefone(),
@@ -47,18 +51,30 @@ public class RepositorioMedicoJpa implements RepositorioMedico {
     }
 
     @Override
-    public void excluirMedico(final Long id) {
+    public void excluir(final Long id) {
         repository.deleteById(id);
     }
 
     @Override
-    public Medico buscarMedico(final Long id) {
+    public Medico buscar(final Long id) {
         var medicoEntity = buscarMedicoEntity(id);
         return medicoMapper.toDomain(medicoEntity);
     }
 
+    @Override
+    public Medico buscarMedicoAleatorioLivreNaData(final Especialidade especialidade,
+                                                   final LocalDateTime data) {
+        return repository.escolherMedicoAleatorioLivreNaData(especialidade, data)
+                .map(medicoMapper::toDomain)
+                .orElseThrow(getMedicoNaoEncontrado());
+    }
+
     private MedicoEntity buscarMedicoEntity(final Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Medico não encontrado"));
+                getMedicoNaoEncontrado());
+    }
+
+    private Supplier<EntityNotFoundException> getMedicoNaoEncontrado() {
+        return () -> new EntityNotFoundException("Médico não encontrado");
     }
 }

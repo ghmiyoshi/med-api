@@ -2,10 +2,10 @@ package br.com.alura.med.infra.security;
 
 import static java.util.Objects.nonNull;
 
+import br.com.alura.med.application.usecases.autenticacao.AutenticarUsuario;
+import br.com.alura.med.application.usecases.autenticacao.GerarToken;
 import br.com.alura.med.infra.handler.TokenInvalidoException;
 import br.com.alura.med.infra.utils.ObjectMapperUtils;
-import br.com.alura.med.naousar.service.autenticacao.AutenticacaoService;
-import br.com.alura.med.naousar.service.autenticacao.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +28,8 @@ public class SecurityFilter extends OncePerRequestFilter {
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String PREFIX_TOKEN = "Bearer ";
 
-    private final TokenService tokenService;
-    private final AutenticacaoService autenticacaoService;
+    private final AutenticarUsuario autenticarUsuario;
+    private final GerarToken gerarToken;
 
     /* Filtro para interceptar todas as requisições */
     @Override
@@ -41,8 +41,8 @@ public class SecurityFilter extends OncePerRequestFilter {
             var tokenJwt = recuperarToken(request);
 
             if (nonNull(tokenJwt)) {
-                var subject = tokenService.getSubject(tokenJwt);
-                var usuario = autenticacaoService.loadUserByUsername(subject);
+                var subject = gerarToken.getSubject(tokenJwt);
+                var usuario = autenticarUsuario.loadUserByUsername(subject);
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
                         usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);

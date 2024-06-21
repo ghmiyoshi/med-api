@@ -26,5 +26,4 @@ public class RevisionAuditorAwareImpl implements AuditorAware<String>, RevisionL
         RevisionInfo revisionInfo = (RevisionInfo) revisionEntity;
         getCurrentAuditor().ifPresent(revisionInfo::setUser);
     }
-
 }

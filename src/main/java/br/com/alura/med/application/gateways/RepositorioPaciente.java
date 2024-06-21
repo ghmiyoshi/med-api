@@ -6,13 +6,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface RepositorioPaciente {
 
-    Paciente cadastrarPaciente(Paciente paciente);
+    Paciente cadastrar(Paciente paciente);
 
     Page<Paciente> buscarTodos(Pageable pageable);
 
-    Paciente atualizarPaciente(Long id, Paciente paciente);
+    Paciente atualizar(Long id, Paciente paciente);
 
-    void excluirPaciente(Long id);
+    void excluir(Long id);
 
-    Paciente buscarPaciente(Long id);
+    Paciente buscar(Long id);
 }

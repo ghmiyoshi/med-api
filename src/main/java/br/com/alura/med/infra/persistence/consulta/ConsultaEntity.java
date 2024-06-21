@@ -38,4 +38,11 @@ public class ConsultaEntity extends JsonAbstract {
     private PacienteEntity paciente;
 
     private LocalDateTime data;
+
+    public ConsultaEntity(MedicoEntity medicoEntity, PacienteEntity pacienteEntity,
+                          LocalDateTime data) {
+        this.medico = medicoEntity;
+        this.paciente = pacienteEntity;
+        this.data = data;
+    }
 }

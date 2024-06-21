@@ -10,6 +10,6 @@ public class CriarMedico {
     private final RepositorioMedico repositorio;
 
     public Medico execute(Medico medico) {
-        return repositorio.cadastrarMedico(medico);
+        return repositorio.cadastrar(medico);
     }
 }

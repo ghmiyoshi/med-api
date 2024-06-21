@@ -8,15 +8,14 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class ObjectMapperUtils {
 
     private static final ObjectMapper OBJECT_MAPPER = objectMapper();
 
-    public static String writeObjectInJson(final Object object) {
+    public String writeObjectInJson(final Object object) {
         try {
             return OBJECT_MAPPER.writeValueAsString(object);
         } catch (JsonProcessingException e) {
@@ -24,7 +23,7 @@ public class ObjectMapperUtils {
         }
     }
 
-    public static String writeObjectInJsonWithNullFields(final Object object) {
+    public String writeObjectInJsonWithNullFields(final Object object) {
         try {
             ObjectMapper objectMapper = OBJECT_MAPPER;
             objectMapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
@@ -34,7 +33,7 @@ public class ObjectMapperUtils {
         }
     }
 
-    private static ObjectMapper objectMapper() {
+    private ObjectMapper objectMapper() {
         var objectMapper = new ObjectMapper();
         var javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDateTime.class,

@@ -9,6 +9,6 @@ public class ExcluirMedico {
     private final RepositorioMedico repositorio;
 
     public void execute(Long id) {
-        repositorio.excluirMedico(id);
+        repositorio.excluir(id);
     }
 }

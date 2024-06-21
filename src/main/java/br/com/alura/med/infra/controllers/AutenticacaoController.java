@@ -1,9 +1,9 @@
 package br.com.alura.med.infra.controllers;
 
+import br.com.alura.med.application.usecases.autenticacao.GerarToken;
 import br.com.alura.med.infra.controllers.requests.DadosAutenticacao;
 import br.com.alura.med.infra.controllers.responses.DadosTokenJwt;
 import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
-import br.com.alura.med.naousar.service.autenticacao.TokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacaoController {
 
     private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
+    private final GerarToken gerarToken;
 
     @PostMapping
     public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {
@@ -30,9 +30,8 @@ public class AutenticacaoController {
         var authentication = authenticationManager.authenticate(authenticationToken);
         log.info("{}::efetuarLogin - Usuário autenticado", getClass().getSimpleName());
 
-        var tokenJwt = tokenService.gerarToken((UsuarioEntity) authentication.getPrincipal());
+        var tokenJwt = gerarToken.execute((UsuarioEntity) authentication.getPrincipal());
         log.info("{}::efetuarLogin - Token gerado com sucesso", getClass().getSimpleName());
         return new DadosTokenJwt(tokenJwt);
     }
-
 }

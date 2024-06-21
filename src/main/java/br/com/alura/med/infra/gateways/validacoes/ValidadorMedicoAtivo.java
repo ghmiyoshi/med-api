@@ -1,7 +1,8 @@
-package br.com.alura.med.naousar.service.consulta.validacoes;
+package br.com.alura.med.infra.gateways.validacoes;
 
 import static java.util.Objects.isNull;
 
+import br.com.alura.med.application.gateways.ValidadorAgendamentoDeConsulta;
 import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
 import br.com.alura.med.infra.handler.ValidacaoException;
 import br.com.alura.med.infra.persistence.medico.MedicoRepository;

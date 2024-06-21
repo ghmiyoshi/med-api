@@ -1,4 +1,4 @@
-package br.com.alura.med.naousar.service.consulta.validacoes;
+package br.com.alura.med.application.gateways;
 
 import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
 

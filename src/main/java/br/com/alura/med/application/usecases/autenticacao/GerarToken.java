@@ -1,4 +1,4 @@
-package br.com.alura.med.naousar.service.autenticacao;
+package br.com.alura.med.application.usecases.autenticacao;
 
 import br.com.alura.med.infra.handler.TokenInvalidoException;
 import br.com.alura.med.infra.persistence.usuario.UsuarioEntity;
@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TokenService {
+public class GerarToken {
 
     private static final String ZONE_ID = "America/Sao_Paulo";
 
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String gerarToken(final UsuarioEntity usuarioEntity) {
+    public String execute(final UsuarioEntity usuarioEntity) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()

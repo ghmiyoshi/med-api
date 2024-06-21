@@ -7,10 +7,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import br.com.alura.med.application.usecases.consulta.AgendarConsulta;
+import br.com.alura.med.application.usecases.consulta.BuscarConsulta;
 import br.com.alura.med.domain.entities.medico.Especialidade;
 import br.com.alura.med.infra.controllers.requests.DadosAgendamentoConsulta;
 import br.com.alura.med.infra.controllers.responses.DadosDetalhamentoConsulta;
-import br.com.alura.med.naousar.service.consulta.ConsultaService;
+import br.com.alura.med.mock.ConsultaMock;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +44,10 @@ class ConsultaControllerTest {
     private JacksonTester<DadosDetalhamentoConsulta> dadosDetalhamentoConsultaJson;
 
     @MockBean
-    private ConsultaService consultaService;
+    private AgendarConsulta agendarConsulta;
+
+    @MockBean
+    private BuscarConsulta buscarConsulta;
 
     @Test
     @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
@@ -59,19 +64,20 @@ class ConsultaControllerTest {
         var data = LocalDateTime.now().plusHours(1);
         var especialidade = Especialidade.CARDIOLOGIA;
 
-        var dadosDetalhamento = new DadosDetalhamentoConsulta(2L, 5L, data, null);
-        when(consultaService.agendar(any(DadosAgendamentoConsulta.class))).thenReturn(dadosDetalhamento);
+        when(agendarConsulta.execute(any(DadosAgendamentoConsulta.class))).thenReturn(ConsultaMock.newConsulta());
 
         var response = mvc.perform(post("/consultas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dadosAgendamentoConsultaJson.write(
-                                new DadosAgendamentoConsulta(2L, 5L, data, especialidade)
+                                new DadosAgendamentoConsulta(2L, 5L, data,
+                                        especialidade)
                         ).getJson()))
                 .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        var jsonEsperado = dadosDetalhamentoConsultaJson.write(dadosDetalhamento).getJson();
+        var jsonEsperado = dadosDetalhamentoConsultaJson.write(new DadosDetalhamentoConsulta("Nome",
+                "Nome", data)).getJson();
 
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
@@ -83,8 +89,7 @@ class ConsultaControllerTest {
         var data = LocalDateTime.now().plusHours(1);
         var especialidade = Especialidade.CARDIOLOGIA;
 
-        var dadosDetalhamento = new DadosDetalhamentoConsulta(2L, 5L, data, null);
-        when(consultaService.buscarAgendamento(anyLong())).thenReturn(dadosDetalhamento);
+        when(buscarConsulta.execute(anyLong())).thenReturn(ConsultaMock.newConsulta());
 
         var response = mvc.perform(get("/consultas/1")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -92,7 +97,9 @@ class ConsultaControllerTest {
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        var jsonEsperado = dadosDetalhamentoConsultaJson.write(dadosDetalhamento).getJson();
+        var jsonEsperado =
+                dadosDetalhamentoConsultaJson.write(new DadosDetalhamentoConsulta("Nome", "Nome",
+                        data)).getJson();
 
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }

@@ -10,6 +10,6 @@ public class BuscarPaciente {
     private final RepositorioPaciente repositorio;
 
     public Paciente execute(Long id) {
-        return repositorio.buscarPaciente(id);
+        return repositorio.buscar(id);
     }
 }
