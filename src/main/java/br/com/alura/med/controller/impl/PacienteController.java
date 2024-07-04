@@ -1,6 +1,10 @@
-package br.com.alura.med.controller;
+package br.com.alura.med.controller.impl;
 
-import br.com.alura.med.domain.paciente.*;
+import br.com.alura.med.domain.paciente.DadosAtualizacaoPaciente;
+import br.com.alura.med.domain.paciente.DadosCadastroPaciente;
+import br.com.alura.med.domain.paciente.DadosDetalhamentoPaciente;
+import br.com.alura.med.domain.paciente.DadosListagemPaciente;
+import br.com.alura.med.domain.paciente.Paciente;
 import br.com.alura.med.domain.repository.PacienteRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -13,7 +17,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j

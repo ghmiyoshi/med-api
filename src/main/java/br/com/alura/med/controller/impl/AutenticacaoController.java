@@ -1,4 +1,4 @@
-package br.com.alura.med.controller;
+package br.com.alura.med.controller.impl;
 
 import br.com.alura.med.domain.usuario.DadosAutenticacao;
 import br.com.alura.med.domain.usuario.Usuario;
@@ -26,7 +26,7 @@ public class AutenticacaoController {
     @PostMapping
     public DadosTokenJwt efetuarLogin(@RequestBody @Valid final DadosAutenticacao dadosAutenticacao) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(),
-                                                                          dadosAutenticacao.senha());
+                dadosAutenticacao.senha());
         var authentication = authenticationManager.authenticate(authenticationToken);
         log.info("{}::efetuarLogin - Usuário autenticado", getClass().getSimpleName());
 

@@ -1,6 +1,7 @@
-package br.com.alura.med.controller;
+package br.com.alura.med.controller.impl;
 
 import br.com.alura.med.config.cache.CachingConfig;
+import br.com.alura.med.controller.MedicoControllerOpenApi;
 import br.com.alura.med.domain.medico.DadosAtualizacaoMedico;
 import br.com.alura.med.domain.medico.DadosCadastroMedico;
 import br.com.alura.med.domain.medico.DadosDetalhamentoMedico;
@@ -19,7 +20,15 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
@@ -27,7 +36,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/medicos")
 @AllArgsConstructor
 @SecurityRequirement(name = "bearer-key")
-public class MedicoController {
+public class MedicoController implements MedicoControllerOpenApi {
 
     private MedicoRepository medicoRepository;
 
@@ -46,7 +55,8 @@ public class MedicoController {
 
     @Cacheable(CachingConfig.MEDICOS)
     @GetMapping
-    public Page<DadosListagemMedico> listar(@PageableDefault(size = 1, sort = "nome", direction = Sort.Direction.ASC) final Pageable pageable) {
+    public Page<DadosListagemMedico> listar(@PageableDefault(size = 1, sort = "nome", direction =
+            Sort.Direction.ASC) final Pageable pageable) {
         log.info("{}::listar - Listando médicos", getClass().getSimpleName());
         return medicoRepository.findAllByAtivoTrue(pageable).map(DadosListagemMedico::new);
     }
@@ -80,7 +90,7 @@ public class MedicoController {
     public DadosDetalhamentoMedico detalhar(@PathVariable final Long id) {
         var medico = medicoRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                                  String.format("Unable to find medico with id %d", id)));
+                        String.format("Unable to find medico with id %d", id)));
         log.info("{}::detalhar - Detalhes do médico: {}", getClass().getSimpleName(), medico);
         return new DadosDetalhamentoMedico(medico);
     }
