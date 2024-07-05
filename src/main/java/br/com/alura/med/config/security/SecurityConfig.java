@@ -21,8 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String[] AUTH_WHITELIST = {"/swagger-ui/**", "/swagger-resources/**",
-            "/v3/api-docs/**", "/webjars/**"};
+    private static final String[] PERMI_ALL_LIST = {"/swagger-ui/**", "/swagger-resources/**",
+            "/v3/api-docs/**", "/actuator/**"};
     private final SecurityFilter securityFilter;
 
     /* Desabilita a seguranca do Spring */
@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and().authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(PERMI_ALL_LIST).permitAll()
                         .anyRequest().authenticated().and()
                         .addFilterBefore(securityFilter,
                                 UsernamePasswordAuthenticationFilter.class))

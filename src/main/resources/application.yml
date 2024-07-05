@@ -39,3 +39,12 @@ server:
 logging:
   level:
     org.hibernate.envers.boot: off
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus

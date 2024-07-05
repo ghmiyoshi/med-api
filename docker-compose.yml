@@ -1,5 +1,11 @@
-version: "3.8"
-name: spring-mysql
+networks:
+  med-network:
+    name: med-network
+
+volumes:
+  prometheus-data:
+    name: prometheus-data
+
 services:
   api:
     container_name: med-api
@@ -9,7 +15,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - spring-mysql-network
+      - med-network
     environment:
       DATASOURCE_URL: ${DATASOURCE_URL}
       DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
@@ -25,7 +31,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - spring-mysql-network
+      - med-network
     environment:
       MYSQL_DATABASE_URL: ${DATASOURCE_URL}
       MYSQL_DATABASE: meddb
@@ -35,6 +41,22 @@ services:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
-networks:
-  spring-mysql-network:
-    name: spring-mysql-network
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - med-network
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - med-network
