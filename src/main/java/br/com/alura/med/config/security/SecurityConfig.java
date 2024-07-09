@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private static final String[] PERMI_ALL_LIST = {"/swagger-ui/**", "/swagger-resources/**",
-            "/v3/api-docs/**", "/actuator/**"};
+            "/v3/api-docs/**", "/actuator/**", "/ping"};
     private final SecurityFilter securityFilter;
 
     /* Desabilita a seguranca do Spring */
