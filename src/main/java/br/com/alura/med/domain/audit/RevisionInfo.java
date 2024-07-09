@@ -1,7 +1,11 @@
 package br.com.alura.med.domain.audit;
 
 import br.com.alura.med.infra.audit.RevisionAuditorAwareImpl;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.envers.RevisionEntity;
 import org.hibernate.envers.RevisionNumber;
@@ -21,6 +25,6 @@ public class RevisionInfo {
     @RevisionTimestamp
     private long timestamp;
 
-    private String user;
+    private String createdBy;
 
 }

@@ -1,8 +1,8 @@
 create table tb_medicos_audit(
-    id            bigint       not null,
-    revision_info_id   bigint       not null,
-    revision_type tinyint      null,
-    ativo         bit          null,
+    id               serial,
+    revision_info_id bigint not null,
+    revision_type    int null,
+    ativo            boolean null,
     crm           varchar(255) null,
     email         varchar(255) null,
     bairro        varchar(255) null,

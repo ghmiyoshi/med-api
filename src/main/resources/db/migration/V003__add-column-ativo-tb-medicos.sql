@@ -1,2 +1,2 @@
-alter table tb_medicos add ativo tinyint;
-update tb_medicos set ativo = 1;
+alter table tb_medicos add ativo boolean;
+update tb_medicos set ativo = true;

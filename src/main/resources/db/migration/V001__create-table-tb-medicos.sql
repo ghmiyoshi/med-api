@@ -1,6 +1,6 @@
 create table tb_medicos(
 
-    id bigint not null auto_increment,
+    id serial,
     nome varchar(100) not null,
     email varchar(100) not null unique,
     crm varchar(6) not null unique,
@@ -14,8 +14,8 @@ create table tb_medicos(
     cidade varchar(100) not null,
     created_by varchar(100) null,
     last_modified_by varchar(100) null,
-    creation_date datetime not null,
-    last_modified_date datetime not null,
+    creation_date      timestamp not null,
+    last_modified_date timestamp not null,
 
     primary key(id)
 );

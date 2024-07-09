@@ -1,6 +1,6 @@
 create table tb_pacientes(
 
-    id bigint not null auto_increment,
+    id serial,
     nome varchar(100) not null,
     email varchar(100) not null unique,
     cpf varchar(14) not null unique,
@@ -12,7 +12,7 @@ create table tb_pacientes(
     uf char(2) not null,
     cidade varchar(100) not null,
     telefone varchar(20) not null,
-    ativo tinyint not null,
+    ativo boolean not null,
 
     primary key(id)
 

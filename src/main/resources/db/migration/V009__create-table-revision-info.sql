@@ -1,7 +1,7 @@
 create table revision_info(
-    id bigint not null auto_increment,
+    id serial,
     timestamp bigint not null,
-    user varchar(255) null,
+    created_by varchar(255) null,
 
     primary key(id)
 );

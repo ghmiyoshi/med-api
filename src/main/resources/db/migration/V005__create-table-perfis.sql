@@ -1,6 +1,6 @@
 create table tb_perfis(
 
-    id bigint not null auto_increment,
+    id serial,
     nome varchar(100) not null,
 
     primary key(id)
