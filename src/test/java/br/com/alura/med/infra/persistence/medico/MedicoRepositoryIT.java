@@ -1,6 +1,7 @@
 package br.com.alura.med.infra.persistence.medico;
 
 import static br.com.alura.med.domain.entities.medico.Especialidade.CARDIOLOGIA;
+import static br.com.alura.med.domain.entities.medico.Especialidade.ORTOPEDIA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import br.com.alura.med.infra.persistence.consulta.ConsultaRepository;
@@ -32,6 +33,13 @@ class MedicoRepositoryIT {
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @DisplayName("Deveria permitir criar tabelas")
+    @Test
+    void shouldPermitCreateTables() {
+        final var totalDeRegistros = medicoRepository.count();
+        assertThat(totalDeRegistros).isGreaterThan(0);
+    }
 
     @DisplayName("Deveria retornar lista de medicos com tamanho maior que zero")
     @Test
@@ -88,5 +96,22 @@ class MedicoRepositoryIT {
                 .isInstanceOf(Optional.class)
                 .isEqualTo(Optional.of(medico));
         assertThat(medicoLivre.get().getEspecialidade()).isEqualTo(CARDIOLOGIA);
+    }
+
+    @DisplayName("Deveria retornar medico pelo id")
+    @Test
+    void shouldFindMedicoById() {
+        // Arrange
+        final var id = 1L;
+
+        // Act
+        final var medico = medicoRepository.findById(id);
+
+        assertThat(medico).isPresent();
+        medico.ifPresent(medicoEntity -> {
+            assertThat(medicoEntity.getId()).isEqualTo(id);
+            assertThat(medicoEntity.getCrm()).isEqualTo("12323");
+            assertThat(medicoEntity.getEspecialidade()).isEqualTo(ORTOPEDIA);
+        });
     }
 }

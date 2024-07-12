@@ -1,4 +1,4 @@
-package br.com.alura.med.controller;
+package br.com.alura.med.infra.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

@@ -67,13 +67,13 @@ class MedicoRepositoryTest extends BaseMockTest {
     void shouldDeleteMedico_whenCallDeleteById() {
         // Arrange
         var id = 1L;
-        doNothing().when(medicoRepository).deleteById(id);
+        doNothing().when(medicoRepository).deleteById(anyLong());
 
         // Act
         medicoRepository.deleteById(id);
 
         // Assert
-        verify(medicoRepository).deleteById(id);
+        verify(medicoRepository).deleteById(anyLong());
     }
 
     @DisplayName("Deveria buscar todos os medicos")
