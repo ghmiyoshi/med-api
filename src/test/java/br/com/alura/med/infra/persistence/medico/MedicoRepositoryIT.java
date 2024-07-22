@@ -9,6 +9,7 @@ import br.com.alura.med.infra.persistence.paciente.PacienteRepository;
 import br.com.alura.med.mock.ConsultaEntityMock;
 import br.com.alura.med.mock.MedicoEntityMock;
 import br.com.alura.med.mock.PacienteEntityMock;
+import jakarta.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -21,6 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Transactional
 //Anotações usadas quando é para configurar o mesmo banco da aplicação MySQL
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.AUTO_CONFIGURED)
 class MedicoRepositoryIT {
@@ -38,7 +40,7 @@ class MedicoRepositoryIT {
     @Test
     void shouldPermitCreateTables() {
         final var totalDeRegistros = medicoRepository.count();
-        assertThat(totalDeRegistros).isGreaterThan(0);
+        assertThat(totalDeRegistros).isPositive();
     }
 
     @DisplayName("Deveria retornar lista de medicos com tamanho maior que zero")

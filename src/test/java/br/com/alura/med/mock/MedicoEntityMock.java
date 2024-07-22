@@ -9,6 +9,6 @@ public class MedicoEntityMock {
 
     public MedicoEntity newMedico(String nome, String email, String crm,
                                   Especialidade especialidade) {
-        return new MedicoEntity(nome, email, null, null, especialidade, null);
+        return new MedicoEntity(nome, email, null, crm, especialidade, null);
     }
 }

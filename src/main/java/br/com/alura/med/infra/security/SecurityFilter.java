@@ -53,7 +53,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().write(ObjectMapperUtils.writeObjectInJsonWithNullFields(
-                    ProblemDetailforStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getReason())));
+                    problemDetailForStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getReason())));
         }
     }
 
@@ -65,7 +65,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         return null;
     }
 
-    private ProblemDetail ProblemDetailforStatusAndDetail(final HttpStatus httpStatus,
+    private ProblemDetail problemDetailForStatusAndDetail(final HttpStatus httpStatus,
                                                           final String detail) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(httpStatus, detail);
         problemDetail.setType(URI.create("https://api.med.com/errors"));

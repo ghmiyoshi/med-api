@@ -1,6 +1,8 @@
 package br.com.alura.med.config;
 
+import br.com.alura.med.application.gateways.RepositorioConsulta;
 import br.com.alura.med.application.gateways.RepositorioMedico;
+import br.com.alura.med.application.usecases.consulta.BuscarConsulta;
 import br.com.alura.med.application.usecases.medico.AtualizarMedico;
 import br.com.alura.med.application.usecases.medico.BuscarMedico;
 import br.com.alura.med.application.usecases.medico.CriarMedico;
@@ -51,5 +53,10 @@ public class MedicoConfig {
     @Bean
     ExcluirMedico excluirMedico(RepositorioMedico repositorioMedico) {
         return new ExcluirMedico(repositorioMedico);
+    }
+
+    @Bean
+    BuscarConsulta buscarConsulta(RepositorioConsulta repositorioConsulta) {
+        return new BuscarConsulta(repositorioConsulta);
     }
 }

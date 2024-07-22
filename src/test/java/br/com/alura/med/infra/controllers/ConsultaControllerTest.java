@@ -87,7 +87,6 @@ class ConsultaControllerTest {
     @WithMockUser
     void shouldReturnConsulta_whenExists() throws Exception {
         var data = LocalDateTime.now().plusHours(1);
-        var especialidade = Especialidade.CARDIOLOGIA;
 
         when(buscarConsulta.execute(anyLong())).thenReturn(ConsultaMock.newConsulta());
 

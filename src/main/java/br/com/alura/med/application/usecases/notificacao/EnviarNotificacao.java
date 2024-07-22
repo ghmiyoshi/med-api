@@ -11,10 +11,10 @@ public class EnviarNotificacao {
 
     @EventListener
     public void execute(final ConsultaEvent event) {
-        log.info("""
-                Consulta do paciente %s agendada para o dia %s com o médico %s""".formatted(event.getConsulta().getPaciente().getNome(),
+        log.info("Consulta do paciente {} agendada para o dia {} com o médico {}",
+                event.getConsulta().getPaciente().getNome(),
                 event.getConsulta().getData(),
-                event.getConsulta().getMedico().getNome()));
+                event.getConsulta().getMedico().getNome());
     }
 
 }

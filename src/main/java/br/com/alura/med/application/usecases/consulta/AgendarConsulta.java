@@ -36,9 +36,7 @@ public class AgendarConsulta {
 
         validacoesAgendamentoDeConsulta.forEach(validacao -> validacao.validar(dados));
 
-        var consulta = criarConsulta.execute(medico, paciente, dados.data());
-
-        return consulta;
+        return criarConsulta.execute(medico, paciente, dados.data());
     }
 
     private Medico escolherMedico(final DadosAgendamentoConsulta dados) {

@@ -39,8 +39,7 @@ public class ApiExceptionHandler {
         return problemDetail;
     }
 
-    private ProblemDetail buildProblemDetailWithFieldErrors(final Exception exception,
-                                                            final List<Map<String, String>> errorFields) {
+    private ProblemDetail buildProblemDetailWithFieldErrors(final List<Map<String, String>> errorFields) {
         var problemDetail = buildProblemDetail(new ResponseStatusException(HttpStatus.BAD_REQUEST,
                 "Um ou mais campos inválidos. Verifique e tente novamente"));
         problemDetail.setProperty("errors", errorFields);
@@ -74,7 +73,7 @@ public class ApiExceptionHandler {
                     }).toList();
 
 
-            return buildProblemDetailWithFieldErrors(exception, apiErrorFields);
+            return buildProblemDetailWithFieldErrors(apiErrorFields);
         }
 
         List<Map<String, String>> apiErrorFields = fieldErrors.stream()
@@ -84,7 +83,7 @@ public class ApiExceptionHandler {
                     errorField.put("message", fieldError.getDefaultMessage());
                     return errorField;
                 }).toList();
-        return buildProblemDetailWithFieldErrors(exception, apiErrorFields);
+        return buildProblemDetailWithFieldErrors(apiErrorFields);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -124,7 +123,7 @@ public class ApiExceptionHandler {
 
     private ProblemDetail handleInvalidFormatException(InvalidFormatException ex) {
         var path = ex.getPath().stream()
-                .map(ref -> ref.getFieldName())
+                .map(Reference::getFieldName)
                 .collect(Collectors.joining("."));
 
         var detail = String.format("A propriedade '%s' recebeu o valor '%s' que é de um tipo " +
@@ -154,7 +153,7 @@ public class ApiExceptionHandler {
 
     private String joinPath(List<Reference> references) {
         return references.stream()
-                .map(ref -> ref.getFieldName())
+                .map(Reference::getFieldName)
                 .collect(Collectors.joining("."));
     }
 }

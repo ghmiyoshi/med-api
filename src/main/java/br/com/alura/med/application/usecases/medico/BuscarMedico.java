@@ -11,11 +11,11 @@ public class BuscarMedico {
 
     private final RepositorioMedico repositorio;
 
-    public Medico execute(Long id) {
+    public Medico execute(final Long id) {
         return repositorio.buscar(id);
     }
 
-    public Medico execute(Especialidade especialidade, LocalDateTime data) {
+    public Medico execute(final Especialidade especialidade, final LocalDateTime data) {
         return repositorio.buscarMedicoAleatorioLivreNaData(especialidade, data);
     }
 }

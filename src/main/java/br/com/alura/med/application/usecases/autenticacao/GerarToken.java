@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class GerarToken {
 
-    private static final String ZONE_ID = "America/Sao_Paulo";
-
     @Value("${api.security.token.secret}")
     private String secret;
 
