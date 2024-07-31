@@ -5,7 +5,6 @@ import br.com.alura.med.infra.security.SecurityFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -18,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @AllArgsConstructor
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(jsr250Enabled = true)
 public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
@@ -27,12 +26,10 @@ public class SecurityConfig {
     /* Desabilita a seguranca do Spring */
     @Bean
     public SecurityFilterChain securityConfiguration(final HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .anyRequest().authenticated().and()
-                        .addFilterBefore(securityFilter,
-                                UsernamePasswordAuthenticationFilter.class))
+        return http.csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(securityFilter,
+                        UsernamePasswordAuthenticationFilter.class)
                 //sobrescrevendo tratador de erros do Security:
                 .exceptionHandling(
                         exception -> exception.authenticationEntryPoint(unauthorizedHandler))

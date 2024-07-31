@@ -48,8 +48,7 @@ class MedicoRepositoryIT {
     void shouldSizeBeGreaterThanZero() {
         final var medicos = medicoRepository.findAll();
 
-        assertThat(medicos).isNotNull().hasSizeGreaterThan(0);
-        assertThat(medicos).hasSize(1);
+        assertThat(medicos).isNotNull().hasSizeGreaterThan(0).hasSize(1);
     }
 
     @Test
@@ -62,9 +61,7 @@ class MedicoRepositoryIT {
                 "@voll.med", "123456", CARDIOLOGIA));
 
         final var paciente = pacienteRepository.save(PacienteEntityMock.newPaciente("Paciente",
-                "paciente" +
-                        "@email.com",
-                "00000000000"));
+                "paciente@email.com", "00000000000"));
 
         consultaRepository.save(ConsultaEntityMock.newConsulta(medico, paciente,
                 proximaSegundaAs10));

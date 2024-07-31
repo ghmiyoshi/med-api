@@ -7,6 +7,7 @@ import br.com.alura.med.domain.entities.medico.Medico;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,22 +21,28 @@ class BuscarMedicoIT {
     @Autowired
     private BuscarMedico buscarMedico;
 
-    @DisplayName("Deve buscar um medico")
-    @Test
-    void shouldFindMedico() {
-        final var medicoFound = buscarMedico.execute(1L);
+    @Nested
+    class BuscarMedicoPorId {
+        @DisplayName("Deve buscar um medico")
+        @Test
+        void shouldFindMedico() {
+            final var medicoFound = buscarMedico.execute(1L);
 
-        assertThat(medicoFound).isNotNull()
-                .isInstanceOf(Medico.class);
-        assertThat(medicoFound.getNome()).isNotNull()
-                .isEqualTo("Gabriel");
+            assertThat(medicoFound).isNotNull()
+                    .isInstanceOf(Medico.class);
+            assertThat(medicoFound.getNome()).isNotNull()
+                    .isEqualTo("Gabriel");
+        }
     }
 
-    @DisplayName("Deve retornar erro quando nao encontrar um medico")
-    @Test
-    void shouldNotFindMedico() {
-        assertThatThrownBy(() -> buscarMedico.execute(100L))
-                .isInstanceOf(EntityNotFoundException.class)
-                .hasMessage("Médico não encontrado");
+    @Nested
+    class BuscarMedicoPorIdInvalido {
+        @DisplayName("Deve retornar erro quando nao encontrar um medico")
+        @Test
+        void shouldNotFindMedico() {
+            assertThatThrownBy(() -> buscarMedico.execute(100L))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Médico não encontrado");
+        }
     }
 }

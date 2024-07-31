@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 public class EnderecoMock {
 
     public EnderecoValueObject newEndereco() {
-        return new EnderecoValueObject("Rua", "Numero", "Complemento", "Bairro", "Cidade",
-                "Estado", "Cep");
+        return new EnderecoValueObject("Rua", "Bairro", "01234567", "São Paulo", "SP",
+                "32A", "123");
     }
 }

@@ -9,6 +9,7 @@ import lombok.experimental.UtilityClass;
 public class MedicoMock {
 
     public Medico newMedico() {
-        return new Medico("Nome", "Email", "Telefone", "Crm", CARDIOLOGIA, null, true);
+        return new Medico("Nome", "email@email.com", "Telefone", "123456", CARDIOLOGIA,
+                EnderecoMock.newEndereco(), true);
     }
 }

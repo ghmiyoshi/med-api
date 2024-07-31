@@ -1,6 +1,7 @@
 package br.com.alura.med.application.usecases.medico;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,9 +12,11 @@ import br.com.alura.med.domain.entities.medico.Medico;
 import br.com.alura.med.mock.MedicoMock;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+@Execution(CONCURRENT)
 class CriarMedicoTest extends BaseMockTest {
 
     @InjectMocks
