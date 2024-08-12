@@ -8,7 +8,6 @@ import br.com.alura.med.infra.controllers.mappers.EnderecoMapper;
 import br.com.alura.med.infra.controllers.mappers.MedicoMapper;
 import br.com.alura.med.infra.persistence.medico.MedicoEntity;
 import br.com.alura.med.infra.persistence.medico.MedicoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +73,7 @@ public class RepositorioMedicoJpa implements RepositorioMedico {
                 getMedicoNaoEncontrado());
     }
 
-    private Supplier<EntityNotFoundException> getMedicoNaoEncontrado() {
-        return () -> new EntityNotFoundException("Médico não encontrado");
+    private Supplier<ResponseStatusException> getMedicoNaoEncontrado() {
+        return () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado");
     }
 }

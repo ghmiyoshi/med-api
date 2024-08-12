@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "required": [
+    "total_pages",
+    "total_elements",
+    "first",
+    "last",
+    "size",
+    "content",
+    "number",
+    "sort",
+    "number_of_elements",
+    "pageable",
+    "empty"
+  ],
+  "properties": {
+    "total_pages": {
+      "type": "integer"
+    },
+    "total_elements": {
+      "type": "integer"
+    },
+    "first": {
+      "type": "boolean"
+    },
+    "last": {
+      "type": "boolean"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "content": {
+      "type": "array"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "sort": {
+      "type": "object",
+      "required": [
+        "empty",
+        "unsorted",
+        "sorted"
+      ],
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        },
+        "sorted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "number_of_elements": {
+      "type": "integer"
+    },
+    "pageable": {
+      "type": "object",
+      "required": [
+        "page_number",
+        "page_size",
+        "sort",
+        "offset",
+        "unpaged",
+        "paged"
+      ],
+      "properties": {
+        "page_number": {
+          "type": "integer"
+        },
+        "page_size": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "object",
+          "required": [
+            "empty",
+            "unsorted",
+            "sorted"
+          ],
+          "properties": {
+            "empty": {
+              "type": "boolean"
+            },
+            "unsorted": {
+              "type": "boolean"
+            },
+            "sorted": {
+              "type": "boolean"
+            }
+          }
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "unpaged": {
+          "type": "boolean"
+        },
+        "paged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "empty": {
+      "type": "boolean"
+    }
+  }
+}

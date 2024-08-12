@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "required": [
+    "nome",
+    "email",
+    "crm",
+    "especialidade",
+    "dados_endereco"
+  ],
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "crm": {
+      "type": "string"
+    },
+    "especialidade": {
+      "type": "string"
+    },
+    "dados_endereco": {
+      "type": "object",
+      "required": [
+        "logradouro",
+        "bairro",
+        "cep",
+        "cidade",
+        "uf",
+        "complemento",
+        "numero"
+      ],
+      "properties": {
+        "logradouro": {
+          "type": "string"
+        },
+        "bairro": {
+          "type": "string"
+        },
+        "cep": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "uf": {
+          "type": "string"
+        },
+        "complemento": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

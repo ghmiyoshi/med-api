@@ -13,3 +13,8 @@ spring:
     defer-datasource-initialization: true # Utilizar somente para testes
   flyway:
     enabled: false
+
+api:
+  security:
+    token:
+      secret: test

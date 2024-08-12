@@ -1,6 +1,8 @@
 package br.com.alura.med.infra.controllers;
 
 import static br.com.alura.med.domain.entities.medico.Especialidade.CARDIOLOGIA;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.empty;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -22,6 +24,7 @@ import br.com.alura.med.domain.entities.medico.Medico;
 import br.com.alura.med.infra.controllers.requests.DadosCadastroMedico;
 import br.com.alura.med.infra.controllers.requests.DadosEndereco;
 import br.com.alura.med.infra.controllers.responses.DadosDetalhamentoMedico;
+import br.com.alura.med.mock.DadosCadastroMedicoMock;
 import br.com.alura.med.mock.MedicoMock;
 import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
@@ -75,15 +78,13 @@ class MedicoControllerTest {
         @DisplayName("Deve retornar status 201")
         @WithMockUser(roles = "ADMIN")
         void deveRetornarStatus201() throws Exception {
-            final var jsonBody = dadosCadastroMedicoJson.write(new DadosCadastroMedico("Nome",
-                    "email@email.com", "11 1234-5678", "123456", CARDIOLOGIA, new DadosEndereco(
-                    "Rua", "Bairro", "01234567", "São Paulo", "SP", "32A", "123"))).getJson();
+            final var jsonBody = dadosCadastroMedicoJson.write(DadosCadastroMedicoMock.newDados()).getJson();
 
             when(criarMedico.execute(any(Medico.class))).thenReturn(MedicoMock.newMedico());
 
             final var jsonEsperado =
                     dadosDetalhamentoMedicoJson.write(new DadosDetalhamentoMedico("Nome",
-                            "email" + "@email.com", "123456", CARDIOLOGIA, new DadosEndereco("Rua"
+                            "email@email.com", "123456", CARDIOLOGIA, new DadosEndereco("Rua"
                             , "Bairro", "01234567", "São Paulo", "SP", "32A", "123"))).getJson();
 
             mvc.perform(post("/medicos").contentType(APPLICATION_JSON)
@@ -145,6 +146,9 @@ class MedicoControllerTest {
             mvc.perform(get("/medicos")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.content", not(empty())))
+                    .andExpect(jsonPath("$.total_elements").value(1))
+                    .andExpect(jsonPath("$.total_pages").value(1))
                     .andExpect(jsonPath("$.content[0].nome").value(medico.getNome().toString()))
                     .andExpect(jsonPath("$.content[0].email").value(medico.getEmail()));
 

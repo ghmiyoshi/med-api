@@ -70,8 +70,7 @@ public class MedicoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @CacheEvict(value = CachingConfig.MEDICOS, allEntries = true)
     @PutMapping
-    public DadosDetalhamentoMedico atualizar(@RequestBody @Valid final DadosAtualizacaoMedico
-                                                     dados) {
+    public DadosDetalhamentoMedico atualizar(@RequestBody @Valid final DadosAtualizacaoMedico dados) {
         log.info("{}::atualizar - Dados recebidos: {}", getClass().getSimpleName(), dados);
         var medico = buscarMedico.execute(dados.id());
         medico = atualizarMedico.execute(dados.id(), medico);
